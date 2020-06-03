@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"os/exec"
 )
 
 const PORT = 8000
@@ -17,8 +16,6 @@ type User struct {
 var gopher = User{"Gopher", "gopher@google.com"}
 
 func main() {
-	out := exec.Command("ls").String()
-	fmt.Print(out)
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/user", userHandlers)
 
@@ -27,7 +24,7 @@ func main() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("templates/index.tmpl")
+	t, err := template.ParseFiles("../frontend/dist/templates/index.tmpl")
 	handleError(err)
 
 	err = t.Execute(w, gopher)
@@ -35,7 +32,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func userHandlers(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("templates/user.tmpl")
+	t, err := template.ParseFiles("../frontend/dist/templates/user.tmpl")
 	handleError(err)
 	err = t.Execute(w, gopher)
 	handleError(err)
