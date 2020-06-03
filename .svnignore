@@ -1,0 +1,6 @@
+frontend/dist
+
+
+*.o
+*.lib
+*.la
