@@ -1,0 +1,68 @@
+CREATE TABLE category
+(
+   id SERIAL PRIMARY KEY NOT NULL,
+   slug VARCHAR(15) NOT NULL,
+   name VARCHAR(15) NOT NULL
+);
+
+CREATE TABLE article
+(
+   id SERIAL PRIMARY KEY NOT NULL,
+   slug VARCHAR(50) NOT NULL,
+   title VARCHAR(50) NOT NULL,
+   description VARCHAR(255) NOT NULL,
+   content TEXT NOT NULL,
+   author VARCHAR NOT NULL,
+   timestamp TIMESTAMP NOT NULL,
+
+   category_id INT REFERENCES category(id)
+);
+
+CREATE TABLE article_tag
+(
+   article_id INT REFERENCES article(id),
+   tag VARCHAR(15)
+);
+
+
+
+INSERT INTO category
+   (slug, name)
+VALUES
+   ('frontend', 'Frontend'),
+   ('backend', 'Backend'),
+   ('news', 'News');
+
+INSERT INTO article
+   (slug, title, description, content, author, timestamp, category_id)
+VALUES
+   ('test-aticle-1', 'Test Article 1', 'Just test article and nothing more (1)', 'Some text \n ## Article 1.1 \n Some more text', 'John Doe', '2016-06-22 19:10:25+03', 1),
+   ('test-aticle-2', 'Test Article 2', 'Just test article and nothing more (2)', 'Some text \n ## Article 2.1 \n Some more text', 'Jane Doe', '2018-07-23 10:55:33+03', 1),
+   ('test-aticle-3', 'Test Article 3', 'Just test article and nothing more (3)', 'Some text \n ## Article 3.1 \n Some more text', 'Jane Doe', '2016-06-22 03:23:28+03', 2),
+   ('test-aticle-4', 'Test Article 4', 'Just test article and nothing more (4)', 'Some text \n ## Article 4.1 \n Some more text', 'Robert Potter', now(), 3);
+
+INSERT INTO article_tag
+VALUES
+   (1, 'html'),
+   (1, 'css'),
+   (1, 'js'),
+   (1, 'react'),
+   (2, 'css'),
+   (2, 'golang'),
+   (2, 'gotmpl'),
+   (3, 'vs code'),
+   (3, 'animation'),
+   (3, 'PWA');
+
+   
+
+SELECT a.id, a.slug, c.name
+FROM article a
+   JOIN category c on a.category_id = c.id
+   JOIN article_tag ta on ta.article_id = a.id;
+
+SELECT a.id, a.slug, c.name
+FROM article a
+   JOIN category c on a.category_id = c.id
+   JOIN article_tag ta on ta.article_id = a.id
+   WHERE ta.tag = 'css';

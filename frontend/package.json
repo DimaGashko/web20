@@ -60,6 +60,8 @@
     "micromodal": "^0.4.2",
     "node-sass": "^4.13.1",
     "regenerator": "^0.14.2",
-    "throttle-debounce": "^2.1.0"
+    "showdown": "^1.9.1",
+    "throttle-debounce": "^2.1.0",
+    "xss-filters": "^1.2.7"
   }
 }
