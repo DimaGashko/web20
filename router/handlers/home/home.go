@@ -9,6 +9,7 @@ import (
 
 	"github.com/microcosm-cc/bluemonday"
 	"github.com/russross/blackfriday/v2"
+	"web20.tk/router/common"
 )
 
 func Home(w http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
@@ -27,6 +28,7 @@ func Home(w http.ResponseWriter, r *http.Request, context map[string]interface{}
 	context["out"] = template.HTML(html)
 
 	context["home-data"] = "something"
+	context["app-config"] = common.AppConfig
 	return "frontend/dist/templates/home.tmpl", nil
 }
 
