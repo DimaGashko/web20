@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="icon" type="image/png" href="~@/img/logo.png" />
+   <title>{{ template "title" .}}</title>
+
+   <%= htmlWebpackPlugin.tags.headTags %>
+   <%= htmlWebpackPlugin.tags.bodyTags %>
+
+   {{ block "styles" . }} {{ end }}
+   {{ block "scripts" . }} {{ end }}
+
+   <% if (process.env.DEV) { %>
+   <script type="application/json" class="app-dot">{{ . }}</script>
+   <script>const dot = JSON.parse(document.querySelector('.app-dot').innerHTML);</script>
+   <% } %>
+</head>
+
+<body>
+   <h1>Base Layout</h1>
+   {{ template "content" . }}
+</body>
+
+</html>
+
+{{ define "title" -}} Web2.0 | Everything you want to know about web {{- end }}

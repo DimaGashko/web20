@@ -26,9 +26,9 @@ const { allPages, getPages } = require('./pages.config');
 const { GO_PORT, SERVE_PORT } = dotenv;
 
 const PATHS = {
-   src: path.resolve(__dirname, 'src'),
+   src: path.resolve(__dirname, 'src/'),
    dist: path.resolve(__dirname, 'dist/'),
-   logo: path.join(__dirname, 'src/images/logo-square.png'),
+   logo: path.join(__dirname, 'src/img/logo.svg/'),
    node_modules: path.resolve(__dirname, 'node_modules/'),
 };
 
@@ -226,7 +226,7 @@ module.exports = ((env = {}) => {
          }, {
             test: /\.(png|jpe?g|webp|svg|gif|ico)$/i,
             loader: 'file-loader?name=[path][name].[ext]',
-            include: path.resolve(__dirname, 'src/images'),
+            include: path.resolve(__dirname, 'src/img'),
          }, {
             test: /\.(woff|woff2)$/i,
             loader: `file-loader?name=fonts/icons/[name]_v2.[ext]?${hashType}`,

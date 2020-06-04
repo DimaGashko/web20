@@ -6,38 +6,41 @@ import (
 	"net/http"
 )
 
+const BASE_LAYOUT_PATH = "frontend/dist/templates/base-layout.tmpl"
+
 type HttpHandler struct {
-	HandlerFunc func(http.ResponseWriter, *http.Request, *map[string]interface{}) (string, *AppError)
+	HandlerFunc func(http.ResponseWriter, *http.Request, map[string]interface{}) (string, error)
 }
 
 func (h HttpHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	var context map[string]interface{}
+	context := make(map[string]interface{})
 
-	tmplPath, appErr := h.HandlerFunc(w, req, &context)
-	if appErr != nil {
-		SendError(appErr, w)
+	tmplPath, err := h.HandlerFunc(w, req, context)
+	if err != nil {
+		SendError(err, w, context)
 		return
 	}
 
-	t, err := template.ParseFiles(tmplPath)
+	t, err := template.ParseFiles(BASE_LAYOUT_PATH, tmplPath)
 	if err != nil {
-		SendError(&AppError{err, http.StatusInternalServerError}, w)
+		SendError(&AppError{err, http.StatusInternalServerError}, w, context)
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 
-	err = t.Execute(w, nil)
+	err = t.Execute(w, context)
 	if err != nil {
 		panic(err)
 	}
 }
 
-func SendError(appErr *AppError, w http.ResponseWriter) {
-	w.WriteHeader(appErr.Code)
+func SendError(err error, w http.ResponseWriter, context map[string]interface{}) {
+	code := GetErrorCode(err)
+	w.WriteHeader(code)
 
 	var tmplPath string
-	switch appErr.Code {
+	switch code {
 	case http.StatusForbidden:
 		tmplPath = "frontend/dist/templates/err403.tmpl"
 	case http.StatusNotFound:
@@ -46,25 +49,33 @@ func SendError(appErr *AppError, w http.ResponseWriter) {
 		tmplPath = "frontend/dist/templates/err500.tmpl"
 	}
 
-	t, err := template.ParseFiles(tmplPath)
+	t, err := template.ParseFiles(BASE_LAYOUT_PATH, tmplPath)
 	if err != nil {
 		panic(err)
 	}
 
-	err = t.Execute(w, nil)
+	err = t.Execute(w, context)
 	if err != nil {
 		panic(err)
 	}
 }
 
-func Send403Error(res http.ResponseWriter, req *http.Request, context *map[string]interface{}) (string, *AppError) {
+func Send403Error(res http.ResponseWriter, req *http.Request, context map[string]interface{}) (string, error) {
 	return "", &AppError{errors.New("Forbidden!"), http.StatusForbidden}
 }
 
-func Send404Error(res http.ResponseWriter, req *http.Request, context *map[string]interface{}) (string, *AppError) {
+func Send404Error(res http.ResponseWriter, req *http.Request, context map[string]interface{}) (string, error) {
 	return "", &AppError{errors.New("Page not found"), http.StatusNotFound}
 }
 
-func Send500Error(res http.ResponseWriter, req *http.Request, context *map[string]interface{}) (string, *AppError) {
+func Send500Error(res http.ResponseWriter, req *http.Request, context map[string]interface{}) (string, error) {
 	return "", &AppError{errors.New("Internal server error"), http.StatusInternalServerError}
+}
+
+func GetErrorCode(err error) int {
+	appErr, ok := err.(*AppError)
+	if !ok {
+		return http.StatusInternalServerError
+	}
+	return appErr.Code
 }

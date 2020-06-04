@@ -1,3 +1,7 @@
+const layoutPages = [
+   page('base-layout', './pages/base-layout'),
+];
+
 const pages = [
    page('home', './pages/home'),
 ];
@@ -8,23 +12,10 @@ const errorPages = [
    page('err403', './pages/errors/err403'),
 ];
 
-const layoutPages = [
-   ...[
-      // 'header',
-      // 'footer',
-   ].map((name) => ({
-      tmpl: `./pages/layout/${name}.tmpl`,
-      tmplRes: `../templates/layout/${name}.tmpl`,
-      name,
-   })), {
-      ...page('base', './pages/layout/base'),
-      tmplRes: `../templates/layout/base.tmpl`,
-   },
-];
-
 const allPages = [
    ...pages,
    ...errorPages,
+   ...layoutPages,
    // ...layoutPages,
 ];
 

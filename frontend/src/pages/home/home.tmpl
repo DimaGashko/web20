@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title> 
+{{ define "styles" }}<%= htmlWebpackPlugin.tags.headTags %>{{ end }}
+{{ define "scripts" }}<%= htmlWebpackPlugin.tags.bodyTags %>{{ end }}
 
-   <%= htmlWebpackPlugin.tags.headTags %>
-   <%= htmlWebpackPlugin.tags.bodyTags %>
-
-</head>
-<body>
+{{ define "content" }}
    <h1>Home page!!!!!!</h1>
-</body>
-</html>
+
+   {{ .out }}
+{{ end }}
