@@ -1,18 +1,11 @@
 package user
 
 import (
-	"html/template"
 	"net/http"
+
+	"web20.tk/router/common"
 )
 
-func Init(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("frontend/dist/templates/user.tmpl")
-	if err != nil {
-		panic(err)
-	}
-
-	err = t.Execute(w, nil)
-	if err != nil {
-		panic(err)
-	}
+func User(w http.ResponseWriter, r *http.Request, context *map[string]interface{}) (string, *common.AppError) {
+	return "frontend/dist/templates/user.tmpl", nil
 }
