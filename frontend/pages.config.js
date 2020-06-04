@@ -24,7 +24,7 @@ const layoutPages = [
 
 const allPages = [
    ...pages,
-   // ...errorPages,
+   ...errorPages,
    // ...layoutPages,
 ];
 

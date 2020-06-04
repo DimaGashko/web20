@@ -11,14 +11,7 @@ import (
 	appRouter "web20.tk/router/routes"
 )
 
-const PORT = 8181
-
-type User struct {
-	Name  string
-	Email string
-}
-
-var gopher = User{"Gopher", "gopher@google.com"}
+const PORT = 9191
 
 var server_stop_rq = make(chan bool, 1)
 
@@ -33,9 +26,10 @@ func runServer() {
 	listen := fmt.Sprintf(":%d", PORT)
 	fmt.Println("SSR server is active")
 	go func() {
-		err := http.ListenAndServe(listen, nil)
+		err := http.ListenAndServe(listen, router)
 		if err != nil {
-			log("ListenAndServe Failed", err)
+			fmt.Println("ListenAndServe Failed")
+			panic(err)
 		}
 	}()
 	<-server_stop_rq
@@ -52,15 +46,4 @@ func waitStopSignal(stopHandler func()) {
 
 func stopServer() {
 	server_stop_rq <- true
-}
-
-func handleError(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
-
-func log(msg string, err error) {
-	fmt.Println(msg)
-	panic(err)
 }

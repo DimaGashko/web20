@@ -1,18 +1,11 @@
 package home
 
 import (
-	"html/template"
 	"net/http"
+
+	"web20.tk/router/common"
 )
 
-func Init(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("frontend/dist/templates/home.tmpl")
-	if err != nil {
-		panic(err)
-	}
-
-	err = t.Execute(w, nil)
-	if err != nil {
-		panic(err)
-	}
+func Home(w http.ResponseWriter, r *http.Request, context *map[string]interface{}) (string, *common.AppError) {
+	return "frontend/dist/templates/home.tmpl", nil
 }
