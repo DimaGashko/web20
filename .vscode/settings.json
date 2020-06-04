@@ -1,0 +1,12 @@
+{
+   "files.associations": {
+      "*.tmpl": "GoHTML",
+   },
+   "emmet.includeLanguages": {
+      "GoHTML": "html",
+      "ejs": "html",
+   },
+   "eslint.workingDirectories": [
+      "./frontend"
+   ],
+}
