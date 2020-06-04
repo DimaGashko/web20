@@ -1,30 +1,58 @@
 package main
 
 import (
+	"encoding/json"
+	"flag"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 
 	"github.com/gorilla/mux"
+	"web20.tk/router/common"
 	appRouter "web20.tk/router/routes"
 )
-
-const PORT = 9191
 
 var server_stop_rq = make(chan bool, 1)
 
 func main() {
+	configure()
 	go waitStopSignal(stopServer)
 	runServer()
+}
+
+func configure() {
+	var configPath = flag.String("config", "config.json", "configuration file")
+	var argPort = flag.Int("port", 9191, "servering port")
+	flag.Parse()
+
+	parseAppConfig(*configPath)
+
+	if *argPort > 0 {
+		common.AppConfig.Port = *argPort
+	}
+}
+
+func parseAppConfig(configPath string) {
+	b, err := ioutil.ReadFile(configPath)
+	if err != nil {
+		fmt.Printf("Couldn't parse config file (%s)\n", configPath)
+		panic(err)
+	}
+	err = json.Unmarshal(b, &common.AppConfig)
+	if err != nil {
+		fmt.Printf("Couldn't unmarshal config file (%s)\n", configPath)
+		panic(err)
+	}
 }
 
 func runServer() {
 	router := mux.NewRouter()
 	appRouter.Init(router)
-	listen := fmt.Sprintf(":%d", PORT)
-	fmt.Println("SSR server is active")
+	listen := fmt.Sprintf(":%d", common.AppConfig.Port)
+	fmt.Printf("SSR server is running on port %d\n", common.AppConfig.Port)
 	go func() {
 		err := http.ListenAndServe(listen, router)
 		if err != nil {

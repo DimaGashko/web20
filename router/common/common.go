@@ -8,6 +8,10 @@ import (
 
 const BASE_LAYOUT_PATH = "frontend/dist/templates/base-layout.tmpl"
 
+var AppConfig struct {
+	Port int `json:"port"`
+}
+
 type HttpHandler struct {
 	HandlerFunc func(http.ResponseWriter, *http.Request, map[string]interface{}) (string, error)
 }

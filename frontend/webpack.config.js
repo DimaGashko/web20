@@ -23,7 +23,7 @@ const cssnano = require('cssnano');
 const dotenv = require('dotenv').config().parsed;
 const { allPages, getPages } = require('./pages.config');
 
-const { GO_PORT, SERVE_PORT } = dotenv;
+const { SERVE_PORT, GO_PORT, GO_CONFIG } = dotenv;
 
 const PATHS = {
    src: path.resolve(__dirname, 'src/'),
@@ -319,7 +319,11 @@ module.exports = ((env = {}) => {
 function runGo() {
    if (goProcess) kill(goProcess.pid);
 
-   goProcess = spawn('go', ['run', 'main.go'], { cwd: '../' });
+   goProcess = spawn('go', [
+      'run', 'main.go',
+      '-config', GO_CONFIG,
+      '-port', GO_PORT,
+   ], { cwd: '../' });
 
    const { stdout, stderr } = goProcess;
    stdout.on('data', (data) => process.stdout.write(chalk.cyan(data)));
