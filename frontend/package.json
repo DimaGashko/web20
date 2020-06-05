@@ -44,6 +44,7 @@
     "string-replace-loader": "^2.2.0",
     "style-loader": "^1.1.2",
     "svg2ttf": "^4.1.0",
+    "text-loader": "^0.0.1",
     "tree-kill": "^1.2.2",
     "ttf2woff": "^2.0.0",
     "ttf2woff2": "^3.0.0",

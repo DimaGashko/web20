@@ -2,7 +2,26 @@
 {{ define "scripts" }}<%= htmlWebpackPlugin.tags.bodyTags %>{{ end }}
 
 {{ define "content" }}
-   <h1>Home page!!!!!!</h1>
+<h1>Home page!!!!!!</h1>
+<svg class="icon icon-search">
+   <use xlink:href="#icon-search"></use>
+</svg>
 
-   {{ .out }}
+<!-- {{ .out }}
+   <br><br>
+   <hr>
+   <br><br>
+
+   {{ range .articles }}
+   <article>
+         <h1>{{ .Title }}</h1>
+         <div class="content">
+            {{ .Content.Html }}
+         </div>
+         <p>{{ .Timestamp }}, {{ .Author }}</p>
+         <a href="/articles/{{ .Slug }}">Read more -></a>
+   </article>
+   <hr>
+   {{ end }} -->
+
 {{ end }}
