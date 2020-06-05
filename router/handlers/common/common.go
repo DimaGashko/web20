@@ -4,14 +4,15 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"os"
+	"path/filepath"
 
 	"web20.tk/core/db"
 )
 
 const (
-	PAGES_PATH   = "frontend/dist/templates/pages/"
-	LAYOUTS_PATH = "frontend/dist/templates/layouts/"
-	DEF_LAYOUT   = LAYOUTS_PATH + "base-layout/base-layout.tmpl"
+	PAGES_PATH  = "frontend/dist/templates/pages/"
+	LAYOUT_PATH = "frontend/dist/templates/layout/"
 )
 
 var AppConfig struct {
@@ -19,24 +20,31 @@ var AppConfig struct {
 	Db   db.Config `json:"db"`
 }
 
-type RouteHandler func(http.ResponseWriter, *http.Request, map[string]interface{}) (string, string, error)
+var layoutTemplates []string
+
+type RouteHandler func(http.ResponseWriter, *http.Request, map[string]interface{}) (string, error)
 
 type HttpHandler struct {
 	HandlerFunc RouteHandler
 }
 
+func init() {
+	loadLayoutTemplates()
+}
+
 func (h HttpHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	context := make(map[string]interface{})
 
-	tmpl, layout, err := h.handle(w, req, context)
+	tmpl, err := h.handle(w, req, context)
 	if err != nil {
 		SendError(err, w, req, context)
 		return
 	}
 
-	t, err := template.ParseFiles(layout, tmpl)
+	t, err := parseTemplate(tmpl)
 	if err != nil {
 		SendError(&AppError{err, http.StatusInternalServerError}, w, req, context)
+		return
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
@@ -48,21 +56,26 @@ func (h HttpHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func (h HttpHandler) handle(w http.ResponseWriter, req *http.Request, context map[string]interface{}) (string, string, error) {
-	tmpl, layout, err := h.HandlerFunc(w, req, context)
+func (h HttpHandler) handle(w http.ResponseWriter, req *http.Request, context map[string]interface{}) (string, error) {
+	tmpl, err := h.HandlerFunc(w, req, context)
 	if err != nil {
-		return "", "", err
+		return "", err
 	}
 
 	if tmpl == "" {
 		panic("Empty template path")
 	}
 
-	if layout == "" {
-		layout = DEF_LAYOUT
+	return tmpl, nil
+}
+
+func parseTemplate(path string) (*template.Template, error) {
+	t, err := template.ParseFiles(append(layoutTemplates, path)...)
+	if err != nil {
+		return nil, err
 	}
 
-	return tmpl, layout, nil
+	return t, err
 }
 
 func SendError(err error, w http.ResponseWriter, req *http.Request, context map[string]interface{}) {
@@ -81,7 +94,7 @@ func SendError(err error, w http.ResponseWriter, req *http.Request, context map[
 		tmplPath = PAGES_PATH + "errors/err500/err500.tmpl"
 	}
 
-	t, err := template.ParseFiles(DEF_LAYOUT, tmplPath)
+	t, err := parseTemplate(tmplPath)
 	if err != nil {
 		panic(err)
 	}
@@ -92,8 +105,8 @@ func SendError(err error, w http.ResponseWriter, req *http.Request, context map[
 	}
 }
 
-func Send404Error(res http.ResponseWriter, req *http.Request, context map[string]interface{}) (string, string, error) {
-	return "", "", MakeError("", http.StatusNotFound)
+func Send404Error(res http.ResponseWriter, req *http.Request, context map[string]interface{}) (string, error) {
+	return "", MakeError("", http.StatusNotFound)
 }
 
 func GetErrorCode(err error) int {
@@ -102,4 +115,16 @@ func GetErrorCode(err error) int {
 		return http.StatusInternalServerError
 	}
 	return appErr.Code
+}
+
+func loadLayoutTemplates() {
+	err := filepath.Walk(LAYOUT_PATH, func(path string, info os.FileInfo, err error) error {
+		if err == nil && !info.IsDir() {
+			layoutTemplates = append(layoutTemplates, path)
+		}
+		return nil
+	})
+	if err != nil {
+		panic(err)
+	}
 }
