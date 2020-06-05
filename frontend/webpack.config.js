@@ -11,7 +11,6 @@ const HtmlReplaceWebpackPlugin = require('html-replace-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
-const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { spawn } = require('child_process');
@@ -21,7 +20,7 @@ const normalizeCharset = require('postcss-normalize-charset');
 const cssnano = require('cssnano');
 
 const dotenv = require('dotenv').config().parsed;
-const { allPages, getPages } = require('./pages.config');
+const { pages } = require('./pages.config');
 
 const { SERVE_PORT, GO_PORT, GO_CONFIG } = dotenv;
 
@@ -62,7 +61,6 @@ let goProcess = null;
 module.exports = ((env = {}) => {
    const isDev = (env.NODE_ENV === 'development');
    const hashType = (!isDev) ? '[contenthash]' : '';
-   const pages = (env.pages) ? getPages(env.pages.split(',')) : allPages;
 
    const maps = true;
    const babel = ('babel' in env) ? env.babel !== 'false' : !isDev;
@@ -77,10 +75,10 @@ module.exports = ((env = {}) => {
       stats: (compact) ? 'none' : 'normal',
       devtool: (maps) ? 'source-map' : false,
       entry: {
-         ...getPagesEntries(pages),
+         ...getEntries(pages),
       },
       output: {
-         filename: `scripts/[name].js?${hashType}`,
+         filename: `scripts/[name].${hashType}.js`,
          path: path.resolve(__dirname, 'dist/static'),
          publicPath: '/static/',
       },
@@ -330,8 +328,8 @@ function runGo() {
    ], { cwd: '../' });
 
    const { stdout, stderr } = goProcess;
-   stdout.on('data', (d) => process.stdout.write(`\n${chalk.cyan(d)}\n`));
-   stderr.on('data', (d) => process.stderr.write(`\n${chalk.cyan(d)}\n`));
+   stdout.on('data', (d) => process.stdout.write(`\n${chalk.cyan(d)}`));
+   stderr.on('data', (d) => process.stderr.write(`\n${chalk.cyan(d)}`));
 
    return goProcess;
 }
@@ -360,11 +358,10 @@ function reload() {
    devServer.sockWrite(devServer.sockets, 'content-changed');
 }
 
-function getPagesEntries(pages) {
+function getEntries(pages) {
    const entries = {};
 
-   pages.forEach(({ name, entry }) => {
-      if (!entry) return;
+   pages.filter(p => p.entry).forEach(({ name, entry }) => {
       entries[name] = entry;
    });
 
@@ -377,14 +374,12 @@ function getHtmlWebpackPlugins(pages, minify) {
       minify: (minify) ? minifyOptions : false,
    };
 
-   return pages.map(({ name, tmpl, tmplRes }) => {
-      if (!tmpl) return null;
-
+   return pages.filter(p => p.tmpl).map(({ name, tmpl }) => {
       return new HtmlWebpackPlugin({
          ...defHtmlWebpackPluginOptions,
-         filename: tmplRes || `../templates/${name}.tmpl`,
+         filename: `../templates/${tmpl}`,
          template: tmpl,
          chunks: [name],
       });
-   }).filter(plugin => plugin);
+   });
 }

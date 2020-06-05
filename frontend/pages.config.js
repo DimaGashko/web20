@@ -1,5 +1,5 @@
-const layoutPages = [
-   page('base-layout', './pages/base-layout'),
+const baseLayout = [
+   layout('base-layout', './layouts/base-layout'),
 ];
 
 const pages = [
@@ -16,8 +16,10 @@ const errorPages = [
 const allPages = [
    ...pages,
    ...errorPages,
-   ...layoutPages,
-   // ...layoutPages,
+];
+
+const allLayouts = [
+   ...baseLayout,
 ];
 
 function page(name, path) {
@@ -28,14 +30,13 @@ function page(name, path) {
    };
 }
 
-function getPages(pagesNames = []) {
-   return [
-      ...layoutPages,
-      ...allPages.filter(({ name }) => pagesNames.includes(name)),
-   ];
+function layout(name, path) {
+   return {
+      name,
+      tmpl: `${path}/${name}.tmpl`,
+   };
 }
 
 module.exports = {
-   allPages,
-   getPages,
+   pages: [...allPages, ...allLayouts],
 };

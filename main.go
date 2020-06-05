@@ -12,7 +12,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"web20.tk/core/db"
-	"web20.tk/router/common"
+	"web20.tk/router/handlers/common"
 	appRouter "web20.tk/router/routes"
 )
 
