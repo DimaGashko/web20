@@ -11,6 +11,7 @@ import (
 	"syscall"
 
 	"github.com/gorilla/mux"
+	"web20.tk/core/db"
 	"web20.tk/router/common"
 	appRouter "web20.tk/router/routes"
 )
@@ -32,6 +33,11 @@ func configure() {
 
 	if *argPort > 0 {
 		common.AppConfig.Port = *argPort
+	}
+
+	err := db.Configure(common.AppConfig.Db)
+	if err != nil {
+		panic(err)
 	}
 }
 

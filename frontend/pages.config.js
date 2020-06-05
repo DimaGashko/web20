@@ -4,6 +4,7 @@ const layoutPages = [
 
 const pages = [
    page('home', './pages/home'),
+   page('add-article', './pages/add-article'),
 ];
 
 const errorPages = [
@@ -21,7 +22,7 @@ const allPages = [
 
 function page(name, path) {
    return {
-      name: name,
+      name,
       entry: `${path}/${name}.js`,
       tmpl: `${path}/${name}.tmpl`,
    };

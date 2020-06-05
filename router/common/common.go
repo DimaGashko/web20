@@ -5,19 +5,15 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+
+	"web20.tk/core/db"
 )
 
 const BASE_LAYOUT_PATH = "frontend/dist/templates/base-layout.tmpl"
 
 var AppConfig struct {
-	Port int `json:"port"`
-	Db   struct {
-		Host     string `json:"host"`
-		Port     int    `json:"port"`
-		User     string `json:"user"`
-		Password string `json:"pass"`
-		Name     string `json:"name"`
-	} `json:"db"`
+	Port int       `json:"port"`
+	Db   db.Config `json:"db"`
 }
 
 type HttpHandler struct {

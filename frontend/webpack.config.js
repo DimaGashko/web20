@@ -228,6 +228,10 @@ module.exports = ((env = {}) => {
             loader: 'file-loader?name=[path][name].[ext]',
             include: path.resolve(__dirname, 'src/img'),
          }, {
+            test: /\.svg$/i,
+            loader: 'text-loader',
+            include: path.resolve(__dirname, 'src/icons/icomoon'),
+         }, {
             test: /\.(woff|woff2)$/i,
             loader: `file-loader?name=fonts/icons/[name]_v2.[ext]?${hashType}`,
             include: path.resolve(__dirname, 'src/fonts/icons'),
@@ -326,11 +330,12 @@ function runGo() {
    ], { cwd: '../' });
 
    const { stdout, stderr } = goProcess;
-   stdout.on('data', (data) => process.stdout.write(chalk.cyan(data)));
-   stderr.on('data', (data) => process.stderr.write(chalk.cyan(data)));
+   stdout.on('data', (d) => process.stdout.write(`\n${chalk.cyan(d)}\n`));
+   stderr.on('data', (d) => process.stderr.write(`\n${chalk.cyan(d)}\n`));
 
    return goProcess;
 }
+
 
 function watchTemplateFiles() {
    chokidar.watch(`${PATHS.src}/**/*.{tmpl,html}`, {
