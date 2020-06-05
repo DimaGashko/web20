@@ -17,7 +17,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-func Home(w http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, string, error) {
+func Home(w http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
 	conn := db.Get()
 
 	context["router"] = mux.CurrentRoute(r).GetName()
@@ -96,7 +96,7 @@ func Home(w http.ResponseWriter, r *http.Request, context map[string]interface{}
 	// 	},
 	// }
 
-	return common.PAGES_PATH + "home/home.tmpl", "", nil
+	return common.PAGES_PATH + "home/home.tmpl", nil
 }
 
 func parseMd(input []byte) []byte {

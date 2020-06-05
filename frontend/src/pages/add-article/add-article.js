@@ -1,1 +1,1 @@
-import '@/layouts/base-layout/base-layout.js';
+import '@/pages/base/base';

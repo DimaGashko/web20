@@ -1,5 +1,6 @@
 const baseLayout = [
-   layout('base-layout', './layouts/base-layout'),
+   layout('./layout/base.tmpl'),
+   layout('./layout/header.tmpl'),
 ];
 
 const pages = [
@@ -22,7 +23,11 @@ const allLayouts = [
    ...baseLayout,
 ];
 
-function page(name, path) {
+module.exports = {
+   pages: [...allPages, ...allLayouts],
+};
+
+function page(name, path ) {
    return {
       name,
       entry: `${path}/${name}.js`,
@@ -30,13 +35,6 @@ function page(name, path) {
    };
 }
 
-function layout(name, path) {
-   return {
-      name,
-      tmpl: `${path}/${name}.tmpl`,
-   };
+function layout(tmpl) {
+   return { tmpl };
 }
-
-module.exports = {
-   pages: [...allPages, ...allLayouts],
-};
