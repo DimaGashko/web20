@@ -60,6 +60,7 @@
     "dotenv-webpack": "^1.7.0",
     "micromodal": "^0.4.2",
     "node-sass": "^4.13.1",
+    "normalize.scss": "^0.1.0",
     "regenerator": "^0.14.2",
     "showdown": "^1.9.1",
     "throttle-debounce": "^2.1.0",

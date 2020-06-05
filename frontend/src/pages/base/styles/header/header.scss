@@ -1,0 +1,13 @@
+.header {
+   padding: 10px 0;
+   height: 64px;
+   color: #fff;
+   background-color: var(--color-primary)
+}
+
+.header__content {
+   height: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}

@@ -1,6 +1,7 @@
 const baseLayout = [
    layout('./layout/base.tmpl'),
    layout('./layout/header.tmpl'),
+   layout('./layout/logo.tmpl'),
 ];
 
 const pages = [

@@ -1,0 +1,13 @@
+@import "./variables";
+
+@mixin a11y-list {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+}
+
+@mixin breakpoint ($size) {
+   @media (min-width: $size) {
+      @content;
+   }
+}

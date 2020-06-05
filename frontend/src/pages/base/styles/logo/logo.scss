@@ -1,0 +1,12 @@
+.logo {
+   display: block;
+   padding-top: 48px;
+   font-size: 40px;
+   font-weight: 600;
+   text-align: center;
+   color: var(--color-primary);
+
+   @include breakpoint($tablet) {
+      font-size: 90px;
+   }
+}

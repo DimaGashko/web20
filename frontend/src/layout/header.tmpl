@@ -1,5 +1,59 @@
 {{ define "header" }}
-<header>
-   <h1>Header</h1>
+<header class="header">
+   <div class="header__content container">
+      <ul class="header-socials">
+         <li class="header-socials__item">
+            <a class="header-socials__link" href="https://github.com/DimaGashko" aria-label="Visit our Github"
+               title="Visit our Github" @blank>
+               <svg class="icon icon-github">
+                  <use xlink:href="#icon-github"></use>
+               </svg>
+            </a>
+         </li>
+         <li class="header-socials__item">
+            <a class="header-socials__link" href="https://www.youtube.com/channel/UCtIuzBa0nmPqNi9VDPt6BFA"
+               aria-label="Watch us on YouTube" title="Watch us on YouTube" @blank>
+               <svg class="icon icon-youtube">
+                  <use xlink:href="#icon-youtube"></use>
+               </svg>
+            </a>
+         </li>
+         <li class="header-socials__item">
+            <a class="header-socials__link" href="https://facebook.com" aria-label="Facebook" title="Facebook" @blank>
+               <svg class="icon icon-facebook">
+                  <use xlink:href="#icon-facebook"></use>
+               </svg>
+            </a>
+         </li>
+         <li class="header-socials__item">
+            <a class="header-socials__link" href="https://facebook.com" aria-label="Twitter" title="Twitter" @blank>
+               <svg class="icon icon-twitter">
+                  <use xlink:href="#icon-twitter"></use>
+               </svg>
+            </a>
+         </li>
+         <li class="header-socials__item">
+            <a class="header-socials__link" href="https://facebook.com" aria-label="Instagram" title="Instagram" @blank>
+               <svg class="icon icon-instagram">
+                  <use xlink:href="#icon-instagram"></use>
+               </svg>
+            </a>
+         </li>
+         <li class="header-socials__item">
+            <a class="header-socials__link" href="https://facebook.com" aria-label="Linkedin" title="Linkedin" @blank>
+               <svg class="icon icon-linkedin">
+                  <use xlink:href="#icon-linkedin"></use>
+               </svg>
+            </a>
+         </li>
+      </ul>
+
+      <form class="header-search" action>
+         <input type="search" class="header-search__field" placeholder="Type keyword to search...">
+         <svg class="header-search__icon icon icon-search">
+            <use xlink:href="#icon-search"></use>
+         </svg>
+      </form>
+   </div>
 </header>
 {{ end }}
