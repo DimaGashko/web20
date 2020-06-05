@@ -1,7 +1,6 @@
 package common
 
 import (
-	"errors"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -31,13 +30,13 @@ func (h HttpHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 	tmpl, layout, err := h.handle(w, req, context)
 	if err != nil {
-		SendError(err, w, context)
+		SendError(err, w, req, context)
 		return
 	}
 
 	t, err := template.ParseFiles(layout, tmpl)
 	if err != nil {
-		SendError(&AppError{err, http.StatusInternalServerError}, w, context)
+		SendError(&AppError{err, http.StatusInternalServerError}, w, req, context)
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
@@ -66,10 +65,11 @@ func (h HttpHandler) handle(w http.ResponseWriter, req *http.Request, context ma
 	return tmpl, layout, nil
 }
 
-func SendError(err error, w http.ResponseWriter, context map[string]interface{}) {
-	fmt.Print(err.Error())
+func SendError(err error, w http.ResponseWriter, req *http.Request, context map[string]interface{}) {
 	code := GetErrorCode(err)
 	w.WriteHeader(code)
+
+	fmt.Printf("Couldn't load page: %s ({ msg: '%s', code: %d })", req.URL, err.Error(), code)
 
 	var tmplPath string
 	switch code {
@@ -93,7 +93,7 @@ func SendError(err error, w http.ResponseWriter, context map[string]interface{})
 }
 
 func Send404Error(res http.ResponseWriter, req *http.Request, context map[string]interface{}) (string, string, error) {
-	return "", "", &AppError{errors.New("Page not found"), http.StatusNotFound}
+	return "", "", MakeError("", http.StatusNotFound)
 }
 
 func GetErrorCode(err error) int {
