@@ -1,0 +1,35 @@
+.header-search {
+   position: relative;
+   height: 44px;
+}
+
+.header-search__field {
+   height: 100%;
+   width: 300px;
+   max-width: 25vw;
+   padding-left: 16px;
+   padding-right: 32px;
+   border-radius: 2px;
+
+   background-color: #212121;
+   border: none;
+
+   outline: none;
+   transition: background-color .3s;
+
+   &:focus {
+     background-color: #1a1a1a;
+
+      &+.header-search__icon {
+         opacity: 0.5;
+      }      
+   }
+}
+
+.header-search__icon {
+   position: absolute;
+   top: calc(50% + 1px);
+   right: 5px;
+   transform: translate(-50%, -50%);
+   transition: opacity .3s;
+}
