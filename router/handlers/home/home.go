@@ -12,13 +12,13 @@ import (
 	"github.com/russross/blackfriday/v2"
 	"web20.tk/core/db"
 	"web20.tk/entries"
+	"web20.tk/router/handlers/common"
 
 	_ "github.com/lib/pq"
 )
 
-func Home(w http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
+func Home(w http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, string, error) {
 	conn := db.Get()
-	fmt.Print(conn.DB())
 
 	context["router"] = mux.CurrentRoute(r).GetName()
 
@@ -96,7 +96,7 @@ func Home(w http.ResponseWriter, r *http.Request, context map[string]interface{}
 	// 	},
 	// }
 
-	return "frontend/dist/templates/home.tmpl", nil
+	return common.PAGES_PATH + "home/home.tmpl", "", nil
 }
 
 func parseMd(input []byte) []byte {
