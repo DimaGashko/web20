@@ -2,6 +2,7 @@ package common
 
 import (
 	"errors"
+	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -10,6 +11,13 @@ const BASE_LAYOUT_PATH = "frontend/dist/templates/base-layout.tmpl"
 
 var AppConfig struct {
 	Port int `json:"port"`
+	Db   struct {
+		Host     string `json:"host"`
+		Port     int    `json:"port"`
+		User     string `json:"user"`
+		Password string `json:"pass"`
+		Name     string `json:"name"`
+	} `json:"db"`
 }
 
 type HttpHandler struct {
@@ -40,6 +48,7 @@ func (h HttpHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 }
 
 func SendError(err error, w http.ResponseWriter, context map[string]interface{}) {
+	fmt.Print(err.Error())
 	code := GetErrorCode(err)
 	w.WriteHeader(code)
 

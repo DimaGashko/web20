@@ -54,9 +54,9 @@ VALUES
    (3, 'animation'),
    (3, 'PWA');
 
-   
 
-SELECT a.id, a.slug, c.name
+
+SELECT a.*, c.name category, c.slug category_slug, ta.tag
 FROM article a
    JOIN category c on a.category_id = c.id
    JOIN article_tag ta on ta.article_id = a.id;
@@ -65,4 +65,4 @@ SELECT a.id, a.slug, c.name
 FROM article a
    JOIN category c on a.category_id = c.id
    JOIN article_tag ta on ta.article_id = a.id
-   WHERE ta.tag = 'css';
+WHERE ta.tag = 'css';
