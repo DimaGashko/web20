@@ -1,5 +1,6 @@
 :root {
    --page-padding: 16px;
+   --page-width: 1140px;
 
    @include breakpoint($tablet) {
       --page-padding: 32px;

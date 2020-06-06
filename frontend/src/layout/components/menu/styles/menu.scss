@@ -8,7 +8,7 @@
    }
 
    @include breakpoint($tablet) {
-      margin: 0 calc(var(--page-padding) - 5px);
+      margin: 0 calc(var(--page-padding) - 8 px);
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
    }
 }
