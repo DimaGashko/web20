@@ -46,4 +46,28 @@ input[type="search"]::-webkit-search-results-decoration {
    padding: 0 var(--page-padding);
    max-width: var(--page-width);
    box-sizing: content-box;
+
+   &--page {
+      padding-top: 48px;
+      padding-bottom: 48px;
+
+      @include breakpoint($tablet) {
+         padding-bottom: 68px;
+      }
+   }
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+   font-style: normal;
+   font-weight: 500;
+   line-height: 1.2;
+}
+
+.h3 {
+   font-size: 1.75rem;
 }
