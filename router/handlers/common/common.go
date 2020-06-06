@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"time"
 
 	"web20.tk/core/db"
 )
@@ -32,18 +33,19 @@ func init() {
 	loadLayoutTemplates()
 }
 
-func (h HttpHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+func (h HttpHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	context := make(map[string]interface{})
 
-	tmpl, err := h.handle(w, req, context)
+	tmpl, err := h.handle(w, r, context)
 	if err != nil {
-		SendError(err, w, req, context)
+		SendError(err, w, r, context)
 		return
 	}
 
+	initLayout(w, r, context)
 	t, err := parseTemplate(tmpl)
 	if err != nil {
-		SendError(&AppError{err, http.StatusInternalServerError}, w, req, context)
+		SendError(&AppError{err, http.StatusInternalServerError}, w, r, context)
 		return
 	}
 
@@ -56,8 +58,8 @@ func (h HttpHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func (h HttpHandler) handle(w http.ResponseWriter, req *http.Request, context map[string]interface{}) (string, error) {
-	tmpl, err := h.HandlerFunc(w, req, context)
+func (h HttpHandler) handle(w http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
+	tmpl, err := h.HandlerFunc(w, r, context)
 	if err != nil {
 		return "", err
 	}
@@ -78,11 +80,11 @@ func parseTemplate(path string) (*template.Template, error) {
 	return t, err
 }
 
-func SendError(err error, w http.ResponseWriter, req *http.Request, context map[string]interface{}) {
+func SendError(err error, w http.ResponseWriter, r *http.Request, context map[string]interface{}) {
 	code := GetErrorCode(err)
 	w.WriteHeader(code)
 
-	fmt.Printf("Couldn't load page: %s ({ msg: '%s', code: %d })", req.URL, err.Error(), code)
+	fmt.Printf("Couldn't load page: %s ({ msg: '%s', code: %d })", r.URL, err.Error(), code)
 
 	var tmplPath string
 	switch code {
@@ -105,7 +107,7 @@ func SendError(err error, w http.ResponseWriter, req *http.Request, context map[
 	}
 }
 
-func Send404Error(res http.ResponseWriter, req *http.Request, context map[string]interface{}) (string, error) {
+func Send404Error(res http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
 	return "", MakeError("", http.StatusNotFound)
 }
 
@@ -127,4 +129,9 @@ func loadLayoutTemplates() {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func initLayout(w http.ResponseWriter, r *http.Request, context map[string]interface{}) error {
+	context["year"] = time.Now().Year()
+	return nil
 }

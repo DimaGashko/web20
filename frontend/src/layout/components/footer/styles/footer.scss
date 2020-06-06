@@ -1,5 +1,71 @@
 .footer {
-   padding: 90px 0;
+   padding: 64px 0;
+   padding-bottom: var(--page-padding);
    background: $color-primary;
    color: $color-bg;
+
+   @include breakpoint($large-tablet) {
+      padding: 90px 0;
+   }
+}
+
+.footer__container {
+   @include breakpoint($large-tablet) {
+      display: flex;
+   }
+}
+
+.footer__title {
+   margin: 0;
+   margin-bottom: 32px;
+
+   font-size: 14px;
+   text-transform: uppercase;
+   letter-spacing: .2em;
+}
+
+.footer__group {
+   @include breakpointMax($large-tablet - 1) {
+      margin-top: 48px;
+
+      &:first-child {
+         margin-top: 0;
+      }
+   }
+}
+
+.footer__about {
+   @include breakpoint($large-tablet) {
+      flex-basis: 350px;
+      margin-right: auto;
+   }
+}
+
+.footer__latest {
+   @include breakpoint($large-tablet) {
+      flex-basis: 300px;
+      margin: 0 50px;
+   }
+}
+
+.footer__links {
+   flex-basis: 160px;
+}
+
+.footer__link {
+   font-weight: 400;
+   opacity: 0.8;
+
+   &:hover {
+      text-decoration: underline;
+   }
+}
+
+.footer__copy {
+   opacity: 0.6;
+   margin: 0;
+
+   @include breakpointMax($large-tablet - 1) {
+      margin-top: 32px;
+   }
 }
