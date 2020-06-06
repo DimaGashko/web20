@@ -8,7 +8,7 @@ const baseLayout = [
 
 const pages = [
    page('home', './pages/home'),
-   page('add-article', './pages/add-article'),
+   page('editor', './pages/editor'),
 ];
 
 const errorPages = [
