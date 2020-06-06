@@ -26,3 +26,22 @@
       cursor: default;
    }
 }
+
+@mixin aspect-ratio($val) {
+   position: relative;
+
+   &:before {
+      content: "";
+      display: block;
+      width: 100%;
+      padding-top: ($val) * 100%;
+   }
+
+   &>* {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+   }
+}

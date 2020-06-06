@@ -4,25 +4,98 @@
 {{ define "logo-mode" -}} full {{- end }}
 
 {{ define "content" }}
-<div class="container">
-   <h1>Home page</h1>
+<div class="container hp">
+   <section class="ph__popular popular" aria-label="popular posts">
+      <ul class="popular__list">
+         <li class="popular__item">
+            <article class="popular-post">
+               <a class="popular-post__link" href="#">
+                  <figure class="popular-post__figure">
+                     <img class="popular-post__img" src="https://picsum.photos/1200/800" alt="post's title">
+                     <figcaption class="popular-post__label">
+                        <div class="popular-post__meta">
+                           <div class="popular-post__category">News</div>
+                           <time datetime="">Match 15, 2018</time>
+                        </div>
+                        <strong class="popular-post__title">There's a New Way to Make titles to posts Lorem ipsum dolor
+                           sit, amet consectetur adipisicing elit. Ab vel quia reprehenderit quas nisi facere
+                           consequuntur et quos pariatur eius.</strong>
+                        <p class="popular-post__description">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                           Quibusdam ipsum at nemo facilis, eos rem nulla nihil itaque adipisci, nisi mollitia quam
+                           possimus architecto! Reiciendis praesentium beatae architecto blanditiis harum sit illum
+                           tempore! Eos esse excepturi ut culpa amet, molestias eaque aperiam minus velit explicabo,
+                           in nulla voluptatum esse maxime ea nobis dolores, consequuntur assumenda rem aut id error,
+                           molestiae sequi saepe repudiandae.</p>
+                     </figcaption>
+                  </figure>
+               </a>
+            </article>
+         </li>
+         <li class="popular__item">
+            <article class="popular-post">
+               <a class="popular-post__link" href="#">
+                  <figure class="popular-post__figure">
+                     <img class="popular-post__img" src="https://picsum.photos/1200/800.jpg?2" alt="post's title">
+                     <figcaption class="popular-post__label">
+                        <div class="popular-post__meta">
+                           <div class="popular-post__category">Courses</div>
+                           <time datetime="">Match 15, 2018</time>
+                        </div>
+                        <strong class="popular-post__title">There's a New Way to Make titles to posts Lorem ipsum dolor
+                           sit, amet consectetur adipisicing elit. Ab vel quia reprehenderit quas nisi facere
+                           consequuntur et quos pariatur eius.</strong>
+                        <p class="popular-post__description">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                           Quibusdam ipsum at nemo facilis, eos rem nulla nihil itaque adipisci, nisi mollitia quam
+                           culpa, dicta distinctio repudiandae fuga quas! Nulla asperiores architecto nihil dicta! Eos
+                           in nulla voluptatum esse maxime ea nobis dolores, consequuntur assumenda rem aut id error,
+                           molestiae sequi saepe repudiandae.</p>
+                     </figcaption>
+                  </figure>
+               </a>
+            </article>
+         </li>
+
+         <li class="popular__item">
+            <article class="popular-post">
+               <a class="popular-post__link" href="#">
+                  <figure class="popular-post__figure">
+                     <img class="popular-post__img" src="https://picsum.photos/1200/800.jpg?3" alt="post's title">
+                     <figcaption class="popular-post__label">
+                        <div class="popular-post__meta">
+                           <div class="popular-post__category">Guides</div>
+                           <time datetime="">Match 15, 2018</time>
+                        </div>
+                        <strong class="popular-post__title">There's a New Way to Make titles to posts Lorem ipsum dolor
+                           sit, amet consectetur adipisicing elit. Ab vel quia reprehenderit quas nisi facere
+                           consequuntur et quos pariatur eius.</strong>
+                        <p class="popular-post__description">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                           Quibusdam ipsum at nemo facilis, eos rem nulla nihil itaque adipisci, nisi mollitia quam
+                           in nulla voluptatum esse maxime ea nobis dolores, consequuntur assumenda rem aut id error,
+                           molestiae sequi saepe repudiandae.</p>
+                     </figcaption>
+                  </figure>
+               </a>
+            </article>
+         </li>
+
+         <li class="popular__item">
+            <article class="popular-post">
+               <a class="popular-post__link" href="#">
+                  <figure class="popular-post__figure">
+                     <img class="popular-post__img" src="https://picsum.photos/1200/800.jpg?4" alt="post's title">
+                     <figcaption class="popular-post__label">
+                        <div class="popular-post__meta">
+                           <div class="popular-post__category">Courses</div>
+                           <time datetime="">Match 15, 2018</time>
+                        </div>
+                        <strong class="popular-post__title">There's a New Nothing.</strong>
+                        <p class="popular-post__description">Lorem ipsum dolor </p>
+                     </figcaption>
+                  </figure>
+               </a>
+            </article>
+         </li>
+      </ul>
+   </section>
 </div>
-
-<!-- {{ .out }}
-   <br><br>
-   <hr>
-   <br><br>
-
-   {{ range .articles }}
-   <article>
-         <h1>{{ .Title }}</h1>
-         <div class="content">
-            {{ .Content.Html }}
-         </div>
-         <p>{{ .Timestamp }}, {{ .Author }}</p>
-         <a href="/articles/{{ .Slug }}">Read more -></a>
-   </article>
-   <hr>
-   {{ end }} -->
-
 {{ end }}

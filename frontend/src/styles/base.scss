@@ -42,9 +42,8 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .container {
-   max-width: 1140px;
    margin: 0 auto;
    padding: 0 var(--page-padding);
-
+   max-width: var(--page-width);
    box-sizing: content-box;
 }

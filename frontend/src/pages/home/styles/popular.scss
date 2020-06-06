@@ -1,0 +1,15 @@
+.popular {
+   &__list {
+      @include a11y-list;
+   }
+
+   &__item {
+      @include aspect-ratio(1/2);
+
+      margin-top: 32px;
+
+      &:first-child {
+         margin-top: 0;
+      }
+   }
+}
