@@ -1,5 +1,7 @@
 {{ define "logo" }}
-<a class='logo logo--{{ template "logo-mode" . }}' href="/" rel="home">Web2.0</a>
+<div class='logo logo--{{ template "logo-mode" . }}'>
+   <a class='logo__logo' href="/" rel="home">Web2.0</a>
+</div>
 {{ end }}
 
 {{ define "logo-mode" -}} compact {{- end }}

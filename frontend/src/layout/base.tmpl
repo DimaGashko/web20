@@ -16,19 +16,23 @@
    {{ block "styles" . }} {{ end }}
    {{ block "scripts" . }} {{ end }}
 
-   <% if (process.env.DEV) { %>
+   <% if (process.env.DEV === "true") { %>
    <script type="application/json" class="app-dot">{{ . }}</script>
    <script>const dot = JSON.parse(document.querySelector('.app-dot').innerHTML);</script>
    <% } %>
 </head>
 
-<body>
+<body class="page">
    <%= require("@/icons/icomoon/symbol-defs.svg") %>
 
    {{ template "header" . }}
    {{ template "logo" . }}
    {{ template "menu" . }}
+
+   <div class="page__content-container">
    {{ template "content" . }}
+   </div>
+   
    {{ template "footer" . }}
 </body>
 

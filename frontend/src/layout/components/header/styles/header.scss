@@ -1,8 +1,8 @@
 .header {
    padding: 10px 0;
    height: 64px;
-   color: #fff;
-   background-color: var(--color-primary)
+   color: $color-bg;
+   background-color: $color-primary;
 }
 
 .header__content {
@@ -10,4 +10,12 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
+}
+
+.header__socials {
+   margin-right: 16px;
+
+   @include breakpoint($mobile) {
+      margin-right: 64px;
+   }
 }

@@ -1,11 +1,12 @@
 .logo {
-   display: block;
+   display: flex;
+   justify-content: center;
+   align-items: flex-end;
+   
    padding-top: 48px;
    font-size: 40px;
    font-weight: 600;
-   text-align: center;
-   line-height: 1;
-   color: var(--color-primary);
+   color: $color-primary;
 
    &--full {
       @include breakpoint($tablet) {

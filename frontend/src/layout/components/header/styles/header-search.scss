@@ -1,24 +1,25 @@
 .header-search {
+   flex-basis: 300px;
    position: relative;
    height: 44px;
 }
 
 .header-search__field {
    height: 100%;
-   width: 300px;
-   max-width: 25vw;
+   width: 100%;
+   //max-width: 25vw;
    padding-left: 16px;
    padding-right: 32px;
    border-radius: 2px;
 
-   background-color: #212121; //TODO:
+   background-color: lighten($color-primary, 13);
    border: none;
 
    outline: none;
    transition: background-color .3s;
 
    &:focus {
-     background-color: #1a1a1a; //TODO:
+     background-color: lighten($color-primary, 6);
 
       &+.header-search__icon {
          opacity: 0.5;

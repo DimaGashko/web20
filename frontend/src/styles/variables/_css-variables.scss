@@ -1,0 +1,7 @@
+:root {
+   --page-padding: 16px;
+
+   @include breakpoint($tablet) {
+      --page-padding: 32px;
+   }
+}
