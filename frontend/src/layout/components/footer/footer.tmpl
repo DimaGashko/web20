@@ -1,7 +1,109 @@
 {{ define "footer" }}
 <footer class="page__footer footer">
    <div class="footer__container container">
-      Footer;
+      <div class="footer__about footer__group footer-about">
+         <h2 class="footer__title">About us</h2>
+         <img class="footer-about__img" src="~@/img/about.jpeg" alt="About us | Web2.0">
+         <address class="footer-about__text">
+            Web2.0 is a blog covering Frontend, Backend and other IT related topics and news. Published by
+            <a class="footer__link" href="https://github.com/DmitryGashko">Dmitry Gashko</a>, web
+            developer at Postindustria, many other developers and just cool people
+         </address>
+      </div>
+
+      <div class="footer__latest footer__group footer-latest">
+         <h2 class="footer__title">Latest posts</h2>
+         <ul class="footer-latest__list">
+            <li class="footer-latest__item"></li>
+            <li class="footer-latest__item"></li>
+            <li class="footer-latest__item"></li>
+         </ul>
+      </div>
+
+      <div class="footer__links footer__group footer-links">
+         <div class="footer-links__group footer-links__group--quick">
+            <h2 class="footer__title">Quick links</h2>
+            <ul class="footer-links__list">
+               <li class="footer-links__item">
+                  <a class="footer-links__link" href="/about" @blank>About</a>
+               </li>
+               <li class="footer-links__item">
+                  <a class="footer-links__link" href="/contact-us" @blank>Contact us</a>
+               </li>
+               <li class="footer-links__item">
+                  <a class="footer-links__link" href="/privacy" @blank>Privacy Policy</a>
+               </li>
+               <li class="footer-links__item">
+                  <a class="footer-links__link" href="/editor/new" @blank>Create a post</a>
+               </li>
+               <li class="footer-links__item">
+                  <a class="footer-links__link" href="https://guides.github.com/features/mastering-markdown/" @blank>Help</a>
+               </li>
+            </ul>
+         </div>
+
+         <div class="footer-links__group footer-links__group--social">
+            <h2 class="footer__title footer-links__social-title">Social</h2>
+            <ul class="footer-links__list">
+               <li class="footer-links__item">
+                  <a class="footer-links__link" href="https://github.com/DimaGashko" @blank>
+                     <svg class="footer-links__icon icon icon-github">
+                        <use xlink:href="#icon-github"></use>
+                     </svg>
+                     Github
+                  </a>
+               </li>
+               <li class="footer-links__item">
+                  <a class="footer-links__link" href="https://www.youtube.com/channel/UCtIuzBa0nmPqNi9VDPt6BFA" @blank>
+                     <svg class="footer-links__icon icon icon-youtube">
+                        <use xlink:href="#icon-youtube"></use>
+                     </svg>
+                     Youtube
+                  </a>
+               </li>
+               <li class="footer-links__item">
+                  <a class="footer-links__link" href="https://facebook.com" @blank>
+                     <svg class="footer-links__icon icon icon-linkedin">
+                        <use xlink:href="#icon-linkedin"></use>
+                     </svg>
+                     Linkedin
+                  </a>
+               </li>
+               <li class="footer-links__item">
+                  <a class="footer-links__link" href="https://instagram.com" @blank>
+                     <svg class="footer-links__icon icon icon-instagram">
+                        <use xlink:href="#icon-instagram"></use>
+                     </svg>
+                     Instagram
+                  </a>
+               </li>
+               <li class="footer-links__item">
+                  <a class="footer-links__link" href="https://facebook.com" @blank>
+                     <svg class="footer-links__icon icon icon-facebook">
+                        <use xlink:href="#icon-facebook"></use>
+                     </svg>
+                     Facebook
+                  </a>
+               </li>
+               <li class="footer-links__item">
+                  <a class="footer-links__link" href="https://twitter.com" @blank>
+                     <svg class="footer-links__icon icon icon-twitter">
+                        <use xlink:href="#icon-twitter"></use>
+                     </svg>
+                     Twitter
+                  </a>
+               </li>
+            </ul>
+         </div>
+      </div>
    </div>
+   <div class="footer__sub-container container">
+      <p class="footer__copy">
+         Copyright &copy;{{ .year }} All rights reserved | See our
+         <a class="footer__link" href="/privacy">Privacy Policy</a>
+         for more details
+      </p>
+   </div>   
 </footer>
 {{ end }}
+</div>

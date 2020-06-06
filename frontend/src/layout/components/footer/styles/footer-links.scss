@@ -1,0 +1,32 @@
+.footer-links {}
+
+.footer-links__list {
+   @include a11y-list;
+   line-height: 2;
+}
+
+.footer-links__link {
+   display: flex;
+   align-items: center;
+
+   transition: filter .3s;
+   
+   &:hover,
+   &:focus {
+      filter: brightness(0.7);
+   }
+}
+
+.footer-links__icon {
+   margin-right: 0.5em;
+   position: relative;
+   top: -2px;
+}
+
+.footer-links__group {
+   margin-top: 48px;
+
+   &:first-child {
+      margin-top: 0;
+   }
+}
