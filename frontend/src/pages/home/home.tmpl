@@ -1,11 +1,15 @@
 {{ define "styles" }}<%= htmlWebpackPlugin.tags.headTags %>{{ end }}
 {{ define "scripts" }}<%= htmlWebpackPlugin.tags.bodyTags %>{{ end }}
 
+{{ define "logo-mode" -}} full {{- end }}
+
 {{ define "content" }}
-<h1>Home page!!!!!!</h1>
-<svg class="icon icon-search">
-   <use xlink:href="#icon-search"></use>
-</svg>
+<div class="container">
+   <h1>Home page!!!!!!</h1>
+   <svg class="icon icon-search">
+      <use xlink:href="#icon-search"></use>
+   </svg>
+</div>
 
 <!-- {{ .out }}
    <br><br>

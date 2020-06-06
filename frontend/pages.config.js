@@ -1,7 +1,9 @@
 const baseLayout = [
+   layout('./layout/components/header/header.tmpl'),
+   layout('./layout/components/logo/logo.tmpl'),
+   layout('./layout/components/menu/menu.tmpl'),
+   layout('./layout/components/footer/footer.tmpl'),
    layout('./layout/base.tmpl'),
-   layout('./layout/header.tmpl'),
-   layout('./layout/logo.tmpl'),
 ];
 
 const pages = [

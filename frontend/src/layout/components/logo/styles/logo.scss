@@ -4,9 +4,12 @@
    font-size: 40px;
    font-weight: 600;
    text-align: center;
+   line-height: 1;
    color: var(--color-primary);
 
-   @include breakpoint($tablet) {
-      font-size: 90px;
+   &--full {
+      @include breakpoint($tablet) {
+         font-size: 90px;
+      }
    }
 }
