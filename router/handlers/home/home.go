@@ -6,7 +6,6 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/gorilla/mux"
 	"github.com/gosimple/slug"
 	"github.com/microcosm-cc/bluemonday"
 	"github.com/russross/blackfriday/v2"
@@ -19,8 +18,6 @@ import (
 
 func Home(w http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
 	conn := db.Get()
-
-	context["router"] = mux.CurrentRoute(r).GetName()
 
 	now := fmt.Sprint(time.Now().Unix())
 

@@ -1,13 +1,25 @@
 {{ define "menu" }}
 <nav class="menu menu-js">
-   <button class="menu__show show-menu-js" aria-label="open menu" aria-expanded="false" aria-controls="menu__list"></button>
+   <button class="menu__show show-menu-js" aria-label="open menu" aria-expanded="false"
+      aria-controls="menu__list"></button>
 
    <ul class="menu__list menu-list-js" id="menu__list">
-      <li class="menu__item menu__item--active"><a class="menu__link" href="/">Home</a></li>
-      <li class="menu__item"><a class="menu__link" href="/editor/new">Editor</a></li>
-      <li class="menu__item"><a class="menu__link" href="/contac-us">Contact</a></li>
-      <li class="menu__item"><a class="menu__link" href="/about">About</a></li>
-      <li class="menu__item">
+      <li class='menu__item {{ if eq .route "home" }} menu__item--active {{ end }}'>
+         <a class="menu__link" href="/">Home</a>
+      </li>
+      <li class='menu__item {{ if or (eq .route "all-posts") (eq .route "post")  }} menu__item--active {{ end }}'>
+         <a class="menu__link" href="/posts">Posts</a>
+      </li>
+      <li class='menu__item {{ if eq .route "editor" }} menu__item--active {{ end }}'>
+         <a class="menu__link" href="/editor/new">Editor</a>
+      </li>
+      <li class='menu__item {{ if eq .route "contact-us" }} menu__item--active {{ end }}'>
+         <a class="menu__link" href="/contac-us">Contact</a>
+      </li>
+      <li class='menu__item {{ if eq .route "about" }} menu__item--active {{ end }}'>
+         <a class="menu__link" href="/about">About</a>
+      </li>
+      <li class='menu__item'>
          <a class="menu__link" href="https://guides.github.com/features/mastering-markdown/" @blank>Help</a>
       </li>
    </ul>

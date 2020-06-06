@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/gorilla/mux"
 	"web20.tk/core/db"
 )
 
@@ -35,6 +36,11 @@ func init() {
 
 func (h HttpHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	context := make(map[string]interface{})
+	err := initLayout(w, r, context)
+	if err != nil {
+		SendError(err, w, r, context)
+		return
+	}
 
 	tmpl, err := h.handle(w, r, context)
 	if err != nil {
@@ -42,7 +48,6 @@ func (h HttpHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	initLayout(w, r, context)
 	t, err := parseTemplate(tmpl)
 	if err != nil {
 		SendError(&AppError{err, http.StatusInternalServerError}, w, r, context)
@@ -132,6 +137,13 @@ func loadLayoutTemplates() {
 }
 
 func initLayout(w http.ResponseWriter, r *http.Request, context map[string]interface{}) error {
+	router := mux.CurrentRoute(r)
+	routeName := "unnamed"
+	if router != nil {
+		routeName = router.GetName()
+	}
+
+	context["route"] = routeName
 	context["year"] = time.Now().Year()
 	return nil
 }

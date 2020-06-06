@@ -15,7 +15,7 @@ func Init(r *mux.Router) {
 	r.NotFoundHandler = h(common.Send404Error)
 
 	r.Handle("/", h(home.Home)).Methods("GET", "HEAD").Name("home")
-	r.Handle("/add-article", h(editor.AddArticle)).Methods("GET", "HEAD").Name("add-article")
+	r.Handle("/editor/new", h(editor.Editor)).Methods("GET", "HEAD").Name("editor")
 }
 
 func h(handler common.RouteHandler) common.HttpHandler {
