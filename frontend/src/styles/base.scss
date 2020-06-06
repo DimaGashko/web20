@@ -1,8 +1,10 @@
+@import './variables/css-variables';
+
 html {
-   font-family: var(--font-primary);
+   font-family: $font-primary;
    line-height: 1.5;
 
-   color: var(--color-text);
+   color: $color-text;
 }
 
 *,
@@ -17,7 +19,7 @@ a {
 }
 
 .link {
-   color: var(--color-secondary);
+   color: $color-secondary;
 
    &:hover {
       text-decoration: underline;
@@ -28,6 +30,7 @@ input[type="search"] {
    -moz-appearance: none;
    -webkit-appearance: none;
    appearance: none;
+   box-sizing: border-box;
 }
 
 input[type="search"]::-webkit-search-decoration,

@@ -17,6 +17,7 @@ type Article struct {
 	Content     Md       `gorm:"content"`
 	Author      string   `gorm:"author"`
 	Timestamp   string   `gorm:"timestamp"`
+	Listed      bool     `gorm:"listed"`
 	Category    Category `gorm:"category;foreignkey:Category"`
 	Tags        []Tag
 }
