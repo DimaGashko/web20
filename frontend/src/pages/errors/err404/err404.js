@@ -1,1 +1,2 @@
-import '@/pages/base/base';
+import base from '@/layout/base';
+base();

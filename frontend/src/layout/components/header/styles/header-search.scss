@@ -11,14 +11,14 @@
    padding-right: 32px;
    border-radius: 2px;
 
-   background-color: #212121;
+   background-color: #212121; //TODO:
    border: none;
 
    outline: none;
    transition: background-color .3s;
 
    &:focus {
-     background-color: #1a1a1a;
+     background-color: #1a1a1a; //TODO:
 
       &+.header-search__icon {
          opacity: 0.5;
@@ -29,7 +29,7 @@
 .header-search__icon {
    position: absolute;
    top: calc(50% + 1px);
-   right: 5px;
+   right: 2px;
    transform: translate(-50%, -50%);
    transition: opacity .3s;
 }

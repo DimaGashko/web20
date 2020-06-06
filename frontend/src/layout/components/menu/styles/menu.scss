@@ -1,0 +1,43 @@
+.menu {
+   position: relative;
+   padding: 0 var(--page-padding)
+}
+
+.menu__show {
+   @include btn;
+
+   position: absolute;
+   top: -40px;
+   left: var(--page-padding);
+
+   display: flex;
+   align-items: center;
+   line-height: 1;
+
+   width: 32px;
+   height: 24px;
+
+   padding: 0;
+
+   background: linear-gradient(to bottom,
+         #000 0%, #000 10%,
+         transparent 10%, transparent 45%,
+         #000 45%, #000 55%,
+         transparent 55%, transparent 90%,
+         #000 90%, #000 100%);
+
+   @include breakpoint($tablet) {
+      display: none;
+   }
+}
+
+.menu__list {
+   @include a11y-list;
+
+   height: 0;
+   overflow: hidden;
+   
+   &--expanded {
+      height: auto;
+   }
+}

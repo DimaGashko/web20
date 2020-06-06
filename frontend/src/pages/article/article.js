@@ -1,3 +1,2 @@
-import '@/layouts/base-layout/base-layout.js';
-
-console.log('article page!!!!!!!!!');
+import base from '@/layout/base';
+base();
