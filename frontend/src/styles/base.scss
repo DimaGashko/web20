@@ -6,6 +6,8 @@ html {
 
    color: $color-text;
    font-weight: $weight-primary;
+
+   //min-width: 300px;
 }
 
 *,
@@ -41,19 +43,23 @@ input[type="search"]::-webkit-search-results-decoration {
    -webkit-appearance: none;
 }
 
+figure {
+   margin: 0;
+}
+
 .container {
    margin: 0 auto;
    padding: 0 var(--page-padding);
    max-width: var(--page-width);
    box-sizing: content-box;
+}
 
-   &--page {
-      padding-top: 48px;
-      padding-bottom: 48px;
+.page-container {
+   padding-top: 48px;
+   padding-bottom: 48px;
 
-      @include breakpoint($tablet) {
-         padding-bottom: 68px;
-      }
+   @include breakpoint($tablet) {
+      padding-bottom: 68px;
    }
 }
 
@@ -66,6 +72,7 @@ input[type="search"]::-webkit-search-results-decoration {
    font-style: normal;
    font-weight: 500;
    line-height: 1.2;
+   margin-top: 0;
 }
 
 .h3 {

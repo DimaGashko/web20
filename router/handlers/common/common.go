@@ -2,19 +2,12 @@ package common
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
-	"os"
-	"path/filepath"
 	"time"
 
 	"github.com/gorilla/mux"
 	"web20.tk/core/db"
-)
-
-const (
-	PAGES_PATH  = "frontend/dist/templates/pages/"
-	LAYOUT_PATH = "frontend/dist/templates/layout/"
+	"web20.tk/templates"
 )
 
 var AppConfig struct {
@@ -22,16 +15,10 @@ var AppConfig struct {
 	Db   db.Config `json:"db"`
 }
 
-var layoutTemplates []string
-
 type RouteHandler func(http.ResponseWriter, *http.Request, map[string]interface{}) (string, error)
 
 type HttpHandler struct {
 	HandlerFunc RouteHandler
-}
-
-func init() {
-	loadLayoutTemplates()
 }
 
 func (h HttpHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -48,7 +35,7 @@ func (h HttpHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	t, err := parseTemplate(tmpl)
+	t, err := templates.ParseTemplate(tmpl)
 	if err != nil {
 		SendError(&AppError{err, http.StatusInternalServerError}, w, r, context)
 		return
@@ -76,15 +63,6 @@ func (h HttpHandler) handle(w http.ResponseWriter, r *http.Request, context map[
 	return tmpl, nil
 }
 
-func parseTemplate(path string) (*template.Template, error) {
-	t, err := template.ParseFiles(append(layoutTemplates, path)...)
-	if err != nil {
-		return nil, err
-	}
-
-	return t, err
-}
-
 func SendError(err error, w http.ResponseWriter, r *http.Request, context map[string]interface{}) {
 	code := GetErrorCode(err)
 	w.WriteHeader(code)
@@ -94,14 +72,14 @@ func SendError(err error, w http.ResponseWriter, r *http.Request, context map[st
 	var tmplPath string
 	switch code {
 	case http.StatusForbidden:
-		tmplPath = PAGES_PATH + "errors/err403/err403.tmpl"
+		tmplPath = templates.PAGES_PATH + "errors/err403/err403.tmpl"
 	case http.StatusNotFound:
-		tmplPath = PAGES_PATH + "errors/err404/err404.tmpl"
+		tmplPath = templates.PAGES_PATH + "errors/err404/err404.tmpl"
 	default:
-		tmplPath = PAGES_PATH + "errors/err500/err500.tmpl"
+		tmplPath = templates.PAGES_PATH + "errors/err500/err500.tmpl"
 	}
 
-	t, err := parseTemplate(tmplPath)
+	t, err := templates.ParseTemplate(tmplPath)
 	if err != nil {
 		panic(err)
 	}
@@ -122,18 +100,6 @@ func GetErrorCode(err error) int {
 		return http.StatusInternalServerError
 	}
 	return appErr.Code
-}
-
-func loadLayoutTemplates() {
-	err := filepath.Walk(LAYOUT_PATH, func(path string, info os.FileInfo, err error) error {
-		if err == nil && !info.IsDir() {
-			layoutTemplates = append(layoutTemplates, path)
-		}
-		return nil
-	})
-	if err != nil {
-		panic(err)
-	}
 }
 
 func initLayout(w http.ResponseWriter, r *http.Request, context map[string]interface{}) error {

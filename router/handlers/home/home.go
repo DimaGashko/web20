@@ -11,7 +11,7 @@ import (
 	"github.com/russross/blackfriday/v2"
 	"web20.tk/core/db"
 	"web20.tk/entries"
-	"web20.tk/router/handlers/common"
+	"web20.tk/templates"
 
 	_ "github.com/lib/pq"
 )
@@ -93,7 +93,7 @@ func Home(w http.ResponseWriter, r *http.Request, context map[string]interface{}
 	// 	},
 	// }
 
-	return common.PAGES_PATH + "home/home.tmpl", nil
+	return templates.PAGES_PATH + "home/home.tmpl", nil
 }
 
 func parseMd(input []byte) []byte {

@@ -4,98 +4,79 @@
 {{ define "logo-mode" -}} full {{- end }}
 
 {{ define "content" }}
-<div class="hp container container--page">
-   <section class="ph__popular popular" aria-label="popular posts">
+<div class="hp page-container">
+   <section class="hp__popular popular container" aria-label="popular posts">
       <ul class="popular__list">
+         {{ range $i, $a := makeSlice 4 }}
          <li class="popular__item">
             <article class="popular-post">
                <a class="popular-post__link" href="#">
                   <figure class="popular-post__figure">
-                     <img class="popular-post__img" src="https://picsum.photos/1200/800" alt="post's title">
+                     <img class="popular-post__img" src="https://picsum.photos/1200/800?{{ $i }}" width="1200"
+                        height="800" alt="post's title" {{ if ge $i 2 }} loading="lazy" {{ end }}>
                      <figcaption class="popular-post__label">
                         <div class="popular-post__meta">
                            <div class="popular-post__category category">News</div>
-                           <tim class="popular-post__date" datetime="">Match 15, 2018</time>
+                           <tim class="popular-post__date" datetime="">March 15, 2018</time>
                         </div>
-                        <strong class="popular-post__title h3">There's a New Way to Make titles to posts Lorem ipsum dolor
+                        <strong class="popular-post__title h3">There's a New Way to Make titles to posts Lorem ipsum
+                           dolor
                            sit, amet consectetur adipisicing elit. Ab vel quia reprehenderit quas nisi facere
                            consequuntur et quos pariatur eius.</strong>
                         <p class="popular-post__description">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                            Quibusdam ipsum at nemo facilis, eos rem nulla nihil itaque adipisci, nisi mollitia quam
-                           possimus architecto! Reiciendis praesentium beatae architecto blanditiis harum sit illum
-                           tempore! Eos esse excepturi ut culpa amet, molestias eaque aperiam minus velit explicabo,
-                           in nulla voluptatum esse maxime ea nobis dolores, consequuntur assumenda rem aut id error,
-                           molestiae sequi saepe repudiandae.</p>
+                           possimus architecto!</p>
                      </figcaption>
                   </figure>
                </a>
             </article>
          </li>
-         <li class="popular__item">
-            <article class="popular-post">
-               <a class="popular-post__link" href="#">
-                  <figure class="popular-post__figure">
-                     <img class="popular-post__img" src="https://picsum.photos/1200/800.jpg?2" alt="post's title">
-                     <figcaption class="popular-post__label">
-                        <div class="popular-post__meta">
-                           <div class="popular-post__category category">Courses</div>
-                           <tim class="popular-post__date" datetime="">Match 15, 2018</time>
-                        </div>
-                        <strong class="popular-post__title h3">There's a New Way to Make titles to posts Lorem ipsum dolor
-                           sit, amet consectetur adipisicing elit. Ab vel quia reprehenderit quas nisi facere
-                           consequuntur et quos pariatur eius.</strong>
-                        <p class="popular-post__description">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                           Quibusdam ipsum at nemo facilis, eos rem nulla nihil itaque adipisci, nisi mollitia quam
-                           culpa, dicta distinctio repudiandae fuga quas! Nulla asperiores architecto nihil dicta! Eos
-                           in nulla voluptatum esse maxime ea nobis dolores, consequuntur assumenda rem aut id error,
-                           molestiae sequi saepe repudiandae.</p>
-                     </figcaption>
-                  </figure>
-               </a>
-            </article>
-         </li>
-
-         <li class="popular__item">
-            <article class="popular-post">
-               <a class="popular-post__link" href="#">
-                  <figure class="popular-post__figure">
-                     <img class="popular-post__img" src="https://picsum.photos/1200/800.jpg?3" alt="post's title">
-                     <figcaption class="popular-post__label">
-                        <div class="popular-post__meta">
-                           <div class="popular-post__category category">Guides</div>
-                           <tim class="popular-post__date" datetime="">Match 15, 2018</time>
-                        </div>
-                        <strong class="popular-post__title h3">There's a New Way to Make titles to posts Lorem ipsum dolor
-                           sit, amet consectetur adipisicing elit. Ab vel quia reprehenderit quas nisi facere
-                           consequuntur et quos pariatur eius.</strong>
-                        <p class="popular-post__description">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                           Quibusdam ipsum at nemo facilis, eos rem nulla nihil itaque adipisci, nisi mollitia quam
-                           in nulla voluptatum esse maxime ea nobis dolores, consequuntur assumenda rem aut id error,
-                           molestiae sequi saepe repudiandae.</p>
-                     </figcaption>
-                  </figure>
-               </a>
-            </article>
-         </li>
-
-         <li class="popular__item">
-            <article class="popular-post">
-               <a class="popular-post__link" href="#">
-                  <figure class="popular-post__figure">
-                     <img class="popular-post__img" src="https://picsum.photos/1200/800.jpg?4" alt="post's title">
-                     <figcaption class="popular-post__label">
-                        <div class="popular-post__meta">
-                           <div class="popular-post__category category">Courses</div>
-                           <tim class="popular-post__date" datetime="">Match 15, 2018</time>
-                        </div>
-                        <strong class="popular-post__title h3">There's a New Nothing.</strong>
-                        <p class="popular-post__description">Lorem ipsum dolor </p>
-                     </figcaption>
-                  </figure>
-               </a>
-            </article>
-         </li>
+         {{ end }}
       </ul>
    </section>
+
+   <div class="hp__main-flow container">
+      <main class="hp__main">
+         <h1 class="hp__section-title h1">Latest posts</h1>
+         <section class="posts-list">
+            <ul class="posts-list__list">
+               {{ range $i, $a := makeSlice 10 }}
+               <li class="posts-list__item">
+                  <article class="post">
+                     <a class="post__list" href="#">
+                        <figure class="post__figure">
+                           <div class="post__img-container">
+                              <img class="post__img" src="https://picsum.photos/500/350?{{ $i }}" width="500"
+                                 height="350" alt="title" loading="lazy">
+                           </div>
+                           <figcaption class="post__label">
+                              <div class="post__meta">
+                                 <div class="category">Guide</div>
+                                 <time class="post__date" datetime="">March 15, 2018</time>
+                              </div>
+                              <strong class="post__title">There's a New Way to Make titles to posts Lorem ipsum
+                                 dolor</strong>
+                           </figcaption>
+                        </figure>
+                     </a>
+                  </article>
+               </li>
+               {{ end }}
+            </ul>
+         </section>
+      </main>
+
+      <aside class="hp__aside hp-aside">
+         <form class="hp-aside__search search-field" action>
+            <input type="search" class="search-field__field" placeholder="Type a keyword and hit enter">
+            <svg class="search-field__icon icon icon-search">
+               <use xlink:href="#icon-search"></use>
+            </svg>
+         </form>
+         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, dolores quos temporibus nemo quibusdam
+            dolore quas reprehenderit totam sunt numquam corrupti quod cum officiis doloremque, odio earum nesciunt
+            exercitationem? Rem.</p>
+      </aside>
+   </div>
 </div>
 {{ end }}
