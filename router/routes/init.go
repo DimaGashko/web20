@@ -6,6 +6,7 @@ import (
 	"web20.tk/router/handlers/common"
 	"web20.tk/router/handlers/editor"
 	"web20.tk/router/handlers/home"
+	"web20.tk/router/handlers/info"
 	"web20.tk/router/handlers/posts"
 
 	"github.com/gorilla/mux"
@@ -19,6 +20,8 @@ func Init(r *mux.Router) {
 	r.Handle("/posts", h(posts.List)).Methods("GET", "HEAD").Name("posts-list")
 	r.Handle("/posts/{slug}", h(posts.Post)).Methods("GET", "HEAD").Name("post")
 	r.Handle("/editor/new", h(editor.Editor)).Methods("GET", "HEAD").Name("editor")
+	r.Handle("/about", h(info.About)).Methods("GET", "HEAD").Name("about")
+	r.Handle("/contact-us", h(info.ContactUs)).Methods("GET", "HEAD").Name("contact-us")
 }
 
 func h(handler common.RouteHandler) common.HttpHandler {

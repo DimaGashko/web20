@@ -1,0 +1,13 @@
+{{ define "styles" }}<%= htmlWebpackPlugin.tags.headTags %>{{ end }}
+{{ define "scripts" }}<%= htmlWebpackPlugin.tags.bodyTags %>{{ end }}
+
+{{ define "content" }}
+<section class="container page-container about-page">
+   <h1 class="h1">About</h1>
+   <address class="about-page__text">
+      Web2.0 is a blog covering Frontend, Backend and other IT related topics and news. Published by
+      <a class="footer__link" href="https://github.com/DmitryGashko">Dmitry Gashko</a>, web
+      developer at Postindustria, many other developers and just cool people
+   </address>
+</section>44
+{{ end }}

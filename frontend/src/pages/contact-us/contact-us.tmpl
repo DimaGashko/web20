@@ -1,0 +1,29 @@
+{{ define "styles" }}<%= htmlWebpackPlugin.tags.headTags %>{{ end }}
+{{ define "scripts" }}<%= htmlWebpackPlugin.tags.bodyTags %>{{ end }}
+
+{{ define "content" }}
+<section class="container page-container about-page">
+   <h1 class="h1">Contact us</h1>
+   <address class="about-page__text">
+      <p>
+         If you have any questions you can email us on
+         <a class="link" href="mailto:dimagashko@gmail.com" @blank>dimagashko@gmail.com</a>.
+      </p>
+
+      <p>
+         Also there's <a class="link" href="https://github.com/DimaGashko" @blank> author's GitHub</a>.
+         Look, you can even create a PR to this project:
+         <a class="link" href="https://github.com/DimaGashko/web20" @blank>Web20 on GitHub</a>
+      </p>
+
+     <p>
+         By the way, if you want to you can <a class="posts-list__more link link--arrow" href="/editor/new">
+            crete a post
+            <svg class="link__arrow icon icon-arrow-right2">
+               <use xlink:href="#icon-arrow-right2"></use>
+            </svg>
+         </a> 
+     </p>
+   </address>
+</section>
+{{ end }}
