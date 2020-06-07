@@ -1,0 +1,31 @@
+.tag {
+   @include ellipsis;
+   display: inline-block;
+   padding: 1px 8px;
+   padding-top: 4px;
+   font-size: 15px;
+   border-radius: 2px;
+
+   color: darken($color-text-secondary, 1);
+   background-color: $color-skeleton;
+   font-weight: 400;
+
+   &--link {
+      padding: 0;
+
+      .tag__link {
+         @include ellipsis;
+         display: block;
+         padding: 1px 8px;
+         padding-top: 4px;
+      }
+   }
+
+   &--has-hover {
+      transition: filter .3s;
+
+      &:hover {
+         filter: brightness(0.9);
+      }
+   }
+}

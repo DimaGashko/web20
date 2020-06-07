@@ -26,3 +26,11 @@
       margin: calc(var(--gap) / 2);
    }
 }
+
+.posts-list__more {
+   margin-top: var(--page-padding);
+
+   &:hover {
+      text-decoration: none;
+   }
+}
