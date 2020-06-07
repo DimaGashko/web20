@@ -1,3 +1,37 @@
-.hp {
-   
+.hp {}
+
+.hp__section-title {
+   color: $font-primary;
+}
+
+.hp__popular {
+   margin-bottom: 64px;
+
+   @include breakpoint($tablet) {
+      margin-bottom: 128px;
+   }
+}
+
+.hp__main-flow {
+   @include breakpoint($large-tablet) {
+      display: flex;
+   }
+}
+
+.hp__main {
+   @include breakpointMax($large-tablet - 1) {
+      margin-bottom: 64px;
+   }
+
+   @include breakpoint($large-tablet) {
+      flex: 1;
+      flex-shrink: 5;
+      margin-right: var(--page-padding);
+   }
+
+}
+
+.hp__aside {
+   flex-basis: 275px;
+   flex-shrink: 1;
 }
