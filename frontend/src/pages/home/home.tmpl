@@ -63,49 +63,103 @@
                </li>
                {{ end }}
             </ul>
+
+            <a class="posts-list__more link link--arrow" href="/posts">
+               See all posts
+               <svg class="link__arrow icon icon-arrow-right2">
+                  <use xlink:href="#icon-arrow-right2"></use>
+               </svg>
+            </a>
          </section>
       </main>
 
-      <aside class="hp__aside hp-aside">
-         <form class="hp-aside__search search-field" action>
+      <aside class="hp__aside info-aside">
+         <form class="info-aside__search search-field" action>
             <input type="search" class="search-field__field" placeholder="Type a keyword and hit enter"
                aria-label="Type a keyword and hit enter">
             <svg class="search-field__icon icon icon-search">
                <use xlink:href="#icon-search"></use>
             </svg>
          </form>
-         <section class="hp-aside__categories categories-list">
+         <section class="info-aside__categories categories-list">
             <h4 class="categories-list__title h4">Categories</h4>
             <ul class="categories-list__list">
                <li class="categories-list__item">
-                  <a href="" class="categories-list__link">
+                  <a class="categories-list__link" href="/posts?categories=backend">
                      <span class="categories-list__name">Courses</span>
                      <span class="categories-list__counter">(12)</span>
                   </a>
                </li>
                <li class="categories-list__item">
-                  <a href="" class="categories-list__link">
+                  <a class="categories-list__link" href="/posts?categories=backend">
                      <span class="categories-list__name">News</span>
                      <span class="categories-list__counter">(23)</span>
                   </a>
                </li>
                <li class="categories-list__item">
-                  <a href="" class="categories-list__link">
+                  <a class="categories-list__link" href="/posts?categories=backend">
                      <span class="categories-list__name">Guides</span>
                      <span class="categories-list__counter">(62)</span>
                   </a>
                </li>
                <li class="categories-list__item">
-                  <a href="" class="categories-list__link">
+                  <a class="categories-list__link" href="/posts?categories=backend">
                      <span class="categories-list__name">Frontend</span>
                      <span class="categories-list__counter">(44)</span>
                   </a>
                </li>
                <li class="categories-list__item">
-                  <a href="" class="categories-list__link">
+                  <a class="categories-list__link" href="/posts?categories=backend">
                      <span class="categories-list__name">Backend</span>
                      <span class="categories-list__counter">(8)</span>
                   </a>
+               </li>
+            </ul>
+         </section>
+         <section class="info-aside__tags tags-list">
+            <h4 class="tags-list__title h4">Tags</h4>
+            <ul class="tags-list__list">
+               <li class="tags-list__item tag tag--link tag--has-hover">
+                  <a class="tag__link" href="/posts?tags=?">html</a>
+               </li>
+               <li class="tags-list__item tag tag--link tag--has-hover">
+                  <a class="tag__link" href="/posts?tags=?">css</a>
+               </li>
+               <li class="tags-list__item tag tag--link tag--has-hover">
+                  <a class="tag__link" href="/posts?tags=?">js</a>
+               </li>
+               <li class="tags-list__item tag tag--link tag--has-hover">
+                  <a class="tag__link" href="/posts?tags=?">TypeScript</a>
+               </li>
+               <li class="tags-list__item tag tag--link tag--has-hover">
+                  <a class="tag__link" href="/posts?tags=?">flexbox</a>
+               </li>
+               <li class="tags-list__item tag tag--link tag--has-hover">
+                  <a class="tag__link" href="/posts?tags=?">golang</a>
+               </li>
+               <li class="tags-list__item tag tag--link tag--has-hover">
+                  <a class="tag__link" href="/posts?tags=?">g</a>
+               </li>
+               <li class="tags-list__item tag tag--link tag--has-hover">
+                  <a class="tag__link" href="/posts?tags=?">lorem fsa fsfasd fasjdjfkasdf </a>
+               </li>
+               <li class="tags-list__item tag tag--link tag--has-hover">
+                  <a class="tag__link" href="/posts?tags=?">VS Code</a>
+               </li>
+               <li class="tags-list__item tag tag--link tag--has-hover">
+                  <a class="tag__link" href="/posts?tags=?">design</a>
+               </li>
+               <li class="tags-list__item tag tag--link tag--has-hover">
+                  <a class="tag__link" href="/posts?tags=?">prolog</a>
+               </li>
+               <li class="tags-list__item tag tag--link tag--has-hover">
+                  <a class="tag__link" href="/posts?tags=?">svn</a>
+               </li>
+               <li class="tags-list__item tag tag--link tag--has-hover">
+                  <a class="tag__link" href="/posts?tags=?">git</a>
+               </li>
+               <li class="tags-list__item tag tag--link tag--has-hover">
+                  <a class="tag__link" href="/posts?tags=?">linux</a>
                </li>
             </ul>
          </section>

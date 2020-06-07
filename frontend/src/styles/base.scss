@@ -27,6 +27,27 @@ a {
    &:hover {
       text-decoration: underline;
    }
+
+   &--arrow {
+      display: inline-flex;
+      align-items: center;
+      font-weight: 600;
+      transition: filter .3s;
+
+      .link__arrow {
+         margin-left: 0.5em;
+         transition: margin-left .3s;
+      }
+
+      &:hover {
+         text-decoration: none;
+         filter: brightness(0.7);
+
+         .link__arrow {
+            margin-left: 1em;
+         }
+      }
+   }
 }
 
 input[type="search"] {
