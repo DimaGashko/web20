@@ -1,0 +1,24 @@
+.post-page {}
+
+.post-page__img-container {
+   @include aspect-ratio(8/13);
+}
+
+.post-page__img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   background-color: $color-skeleton;
+}
+
+.post-page__description {
+   line-height: 2;
+}
+
+.post-page__content {
+   line-height: 2;
+}
+
+.info-aside .search-field {
+   display: none;
+}

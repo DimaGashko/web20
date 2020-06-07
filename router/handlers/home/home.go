@@ -21,7 +21,7 @@ func Home(w http.ResponseWriter, r *http.Request, context map[string]interface{}
 
 	now := fmt.Sprint(time.Now().Unix())
 
-	article := entries.Article{
+	article := entries.Post{
 		Slug:        now + "-" + slug.Make("SHA1 Collision"),
 		Title:       "SHA1 Collision",
 		Description: "When I was doing the DEF CON CTF Qualifier last weekend, I came across an interesting question where you need to create two pdf files with the same SHA1 hash.",
@@ -93,7 +93,7 @@ func Home(w http.ResponseWriter, r *http.Request, context map[string]interface{}
 	// 	},
 	// }
 
-	return templates.PAGES_PATH + "home/home.tmpl", nil
+	return templates.PATH + "home.tmpl", nil
 }
 
 func parseMd(input []byte) []byte {

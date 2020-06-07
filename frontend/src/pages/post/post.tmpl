@@ -1,16 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+{{ define "styles" }}<%= htmlWebpackPlugin.tags.headTags %>{{ end }}
+{{ define "scripts" }}<%= htmlWebpackPlugin.tags.bodyTags %>{{ end }}
 
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
-</head>
+{{ define "title" }} {{ .post.Title }} | Web2.0 {{ end }}
 
-<body>
-   <section class="container page-container">
-      <h1>Article</h1>
-   </section>
-</body>
+{{ define "content" }}
+<div class="post-page page-container container main-flow">
+   <main class="main-flow__main">
+      <h1 class="h1">{{ .post.Title }}</h1>
+      <p class="post-page__description">{{ .post.Description }}</p>
+      <div class="post-page__img-container">
+         <img class="post-page__img" src="https://picsum.photos/500/350" width="500" height="350" alt="{{ .post.Title }}">
+      </div>
+      <div class="post-page__content">{{ .post.Content.Html }}</div>
+   </main>
 
-</html>
+   <aside class="main-flow__aside">{{ template "info-aside" . }}</aside>
+</div>
+{{ end }}

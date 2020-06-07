@@ -1,19 +1,19 @@
-.tags-list {}
+.tags-cloud {}
 
-.tags-list__title {
+.tags-cloud__title {
    padding-bottom: 1em;
    border-bottom: 1px solid $color-border;
    color: $color-primary;
 }
 
-.tags-list__list {
+.tags-cloud__list {
    @include a11y-list;
    display: flex;
    flex-wrap: wrap;
    margin: -3px;
 }
 
-.tags-list__item {
+.tags-cloud__item {
    flex: 1 auto;
    text-align: center;
    background: red;

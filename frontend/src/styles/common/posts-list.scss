@@ -1,0 +1,36 @@
+.posts-list {
+   --gap: var(--page-padding);
+}
+
+.posts-list__list {
+   @include a11y-list;
+
+   @include breakpoint($mobile) {
+      display: flex;
+      flex-wrap: wrap;
+      margin: calc(-1 * var(--gap) / 2);
+   }
+}
+
+.posts-list__item {
+   @include breakpointMax($mobile - 1) {
+      margin-top: var(--page-padding);
+
+      &:first-child {
+         margin-top: 0;
+      }
+   }
+
+   @include breakpoint($mobile) {
+      flex: calc(50% - var(--gap));
+      margin: calc(var(--gap) / 2);
+   }
+}
+
+.posts-list__more {
+   margin-top: var(--page-padding);
+
+   &:hover {
+      text-decoration: none;
+   }
+}

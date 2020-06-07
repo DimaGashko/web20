@@ -1,0 +1,38 @@
+{{ define "styles" }}<%= htmlWebpackPlugin.tags.headTags %>{{ end }}
+{{ define "scripts" }}<%= htmlWebpackPlugin.tags.bodyTags %>{{ end }}
+
+{{ define "title" }} {{ .post.Title }} | Web2.0 {{ end }}
+
+{{ define "content" }}
+<div class="post-page page-container container main-flow">
+   <main class="main-flow__main posts-list">
+      <h1 class="h1">All posts</h1>
+         <ul class="posts-list__list">
+            {{ range $i, $a := makeSlice 20 }}
+            <li class="posts-list__item">
+               <article class="post">
+                  <a class="post__list" href="#">
+                     <figure class="post__figure">
+                        <div class="post__img-container">
+                           <img class="post__img" src="https://picsum.photos/500/350?{{ $i }}" width="500" height="350"
+                              alt="title" loading="lazy">
+                        </div>
+                        <figcaption class="post__label">
+                           <div class="post__meta">
+                              <div class="category">Guide</div>
+                              <time class="post__date" datetime="">March 15, 2018</time>
+                           </div>
+                           <strong class="post__title">There's a New Way to Make titles to posts Lorem ipsum
+                              dolor</strong>
+                        </figcaption>
+                     </figure>
+                  </a>
+               </article>
+            </li>
+            {{ end }}
+         </ul>
+   </main>
+
+   <aside class="main-flow__aside">{{ template "info-aside" . }}</aside>
+</div>
+{{ end }}

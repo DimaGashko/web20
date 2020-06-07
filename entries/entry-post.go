@@ -3,22 +3,23 @@ package entries
 import (
 	"html/template"
 	"regexp"
+	"time"
 
 	"github.com/jinzhu/gorm"
 	"github.com/microcosm-cc/bluemonday"
 	"github.com/russross/blackfriday/v2"
 )
 
-type Article struct {
+type Post struct {
 	gorm.Model
-	Slug        string   `gorm:"slug;unique_index"`
-	Title       string   `gorm:"title"`
-	Description string   `gorm:"description"`
-	Content     Md       `gorm:"content"`
-	Author      string   `gorm:"author"`
-	Timestamp   string   `gorm:"timestamp"`
-	Listed      bool     `gorm:"listed"`
-	Category    Category `gorm:"category;foreignkey:Category"`
+	Slug        string    `gorm:"slug;unique_index"`
+	Title       string    `gorm:"title"`
+	Description string    `gorm:"description"`
+	Content     Md        `gorm:"content"`
+	Author      string    `gorm:"author"`
+	Timestamp   time.Time `gorm:"timestamp"`
+	Listed      bool      `gorm:"listed"`
+	Category    Category  `gorm:"category;foreignkey:Category"`
 	Tags        []Tag
 }
 

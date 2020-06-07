@@ -369,10 +369,10 @@ function getHtmlWebpackPlugins(pages, minify) {
       minify: (minify) ? minifyOptions : false,
    };
 
-   return pages.filter(p => p.tmpl).map(({ name, tmpl }) => {
+   return pages.filter(p => p.tmpl).map(({ name, tmpl, tmplOut }) => {
       return new HtmlWebpackPlugin({
          ...defHtmlWebpackPluginOptions,
-         filename: `../templates/${tmpl}`,
+         filename: `../templates/${tmplOut}`,
          template: tmpl,
          chunks: [name],
       });

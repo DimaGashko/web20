@@ -1,0 +1,26 @@
+.main-flow {
+   @include breakpoint($large-tablet) {
+      display: flex;
+   }
+}
+
+.main-flow__main {
+   @include breakpointMax($large-tablet - 1) {
+      margin-bottom: 64px;
+   }
+
+   @include breakpoint($large-tablet) {
+      flex: 1;
+      margin-right: var(--page-padding);
+   }
+
+}
+
+.main-flow__aside {
+   flex-basis: 275px;
+   flex-shrink: 0;
+
+   @include breakpoint($large-tablet) {
+      margin-top: 60px;
+   }
+}

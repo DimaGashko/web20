@@ -7,5 +7,5 @@ import (
 )
 
 func Editor(w http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
-	return templates.PAGES_PATH + "editor/editor.tmpl", nil
+	return templates.PATH + "editor.tmpl", nil
 }

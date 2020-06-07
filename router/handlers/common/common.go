@@ -44,7 +44,7 @@ func (h HttpHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 
-	err = t.Execute(w, context)
+	err = t.ExecuteTemplate(w, "base.tmpl", context)
 	if err != nil {
 		panic(err)
 	}
@@ -69,29 +69,29 @@ func SendError(err error, w http.ResponseWriter, r *http.Request, context map[st
 
 	fmt.Printf("Couldn't load page: %s ({ msg: '%s', code: %d })", r.URL, err.Error(), code)
 
-	var tmplPath string
+	var tmpl string
 	switch code {
 	case http.StatusForbidden:
-		tmplPath = templates.PAGES_PATH + "errors/err403/err403.tmpl"
+		tmpl = templates.PATH + "err403.tmpl"
 	case http.StatusNotFound:
-		tmplPath = templates.PAGES_PATH + "errors/err404/err404.tmpl"
+		tmpl = templates.PATH + "err404.tmpl"
 	default:
-		tmplPath = templates.PAGES_PATH + "errors/err500/err500.tmpl"
+		tmpl = templates.PATH + "err500.tmpl"
 	}
 
-	t, err := templates.ParseTemplate(tmplPath)
+	t, err := templates.ParseTemplate(tmpl)
 	if err != nil {
 		panic(err)
 	}
 
-	err = t.Execute(w, context)
+	err = t.ExecuteTemplate(w, "base.tmpl", context)
 	if err != nil {
 		panic(err)
 	}
 }
 
 func Send404Error(res http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
-	return "", MakeError("", http.StatusNotFound)
+	return "", New404()
 }
 
 func GetErrorCode(err error) int {
