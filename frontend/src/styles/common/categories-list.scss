@@ -1,0 +1,38 @@
+.categories-list {
+
+}
+
+.categories-list__title {
+   padding-bottom: 1em;
+   border-bottom: 1px solid $color-border;
+   color: $color-primary;
+}
+
+.categories-list__list {
+   @include a11y-list;
+}
+
+.categories-list__item {
+   padding: 0.7em 0;
+   border-bottom: 1px solid $color-border;
+   font-weight: 400;
+}
+
+.categories-list__link {
+   display: flex;
+   justify-content: space-between;
+   transition: filter .3s;
+
+   &:hover,
+   &:focus {
+      filter: brightness(0.4);
+   }
+}
+
+.categories-list__name {
+   color: $color-secondary;
+}
+
+.categories-list__counter {
+   color: $color-text-secondary;
+}

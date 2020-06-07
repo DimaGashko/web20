@@ -231,13 +231,8 @@ module.exports = ((env = {}) => {
             include: path.resolve(__dirname, 'src/icons/icomoon'),
          }, {
             test: /\.(woff|woff2)$/i,
-            loader: `file-loader?name=fonts/icons/[name]_v2.[ext]?${hashType}`,
-            include: path.resolve(__dirname, 'src/fonts/icons'),
-         }, {
-            test: /\.(woff|woff2)$/i,
-            loader: 'file-loader?name=fonts/[name].[ext]',
+            loader: `file-loader?name=fonts/[name].${hashType}.[ext]`,
             include: path.resolve(__dirname, 'src/fonts'),
-            exclude: path.resolve(__dirname, 'src/fonts/icons'),
          }],
       },
       plugins: [
@@ -273,7 +268,7 @@ module.exports = ((env = {}) => {
          ),
 
          new MiniCssExtractPlugin({
-            filename: `styles/[name].css?${hashType}`,
+            filename: `styles/[name].${hashType}.css`,
          }),
 
          new ScriptExtHtmlWebpackPlugin({

@@ -1,3 +1,13 @@
 .hp-aside {
-   
+   @include breakpoint($large-tablet) {
+      padding-top: 60px;
+   }
+}
+
+.hp-aside__search {
+   margin-bottom: 64px;
+}
+
+.hp-aside__categories {
+
 }
