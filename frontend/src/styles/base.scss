@@ -69,6 +69,10 @@ figure {
    margin: 0;
 }
 
+b, strong {
+   font-weight: 400;
+}
+
 .container {
    margin: 0 auto;
    padding: 0 var(--page-padding);
