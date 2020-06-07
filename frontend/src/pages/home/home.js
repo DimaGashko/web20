@@ -1,5 +1,8 @@
+
 import base from '@/layout/base';
 
+
+import '@/styles/common/categories-list.scss';
 import '@/styles/common/category.scss';
 import '@/styles/common/post.scss';
 

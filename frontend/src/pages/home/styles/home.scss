@@ -1,10 +1,10 @@
 .hp {}
 
 .hp__section-title {
-   color: $font-primary;
+   color: $color-primary;
 }
 
-.hp__popular {
+.hp__popular[class] {
    margin-bottom: 64px;
 
    @include breakpoint($tablet) {
