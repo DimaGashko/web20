@@ -1,7 +1,5 @@
 .info-aside {
-   @include breakpoint($large-tablet) {
-      padding-top: 60px;
-   }
+   
 }
 
 .info-aside__search {

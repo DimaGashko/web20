@@ -25,3 +25,15 @@ func MakeError(msg string, code int) *AppError {
 
 	return WrapError(errors.New(msg), code)
 }
+
+func New403() *AppError {
+	return MakeError("", http.StatusForbidden)
+}
+
+func New404() *AppError {
+	return MakeError("", http.StatusNotFound)
+}
+
+func New500() *AppError {
+	return MakeError("", http.StatusInternalServerError)
+}

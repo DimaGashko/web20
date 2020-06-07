@@ -7,7 +7,7 @@
       <li class='menu__item {{ if eq .route "home" }} menu__item--active {{ end }}'>
          <a class="menu__link" href="/">Home</a>
       </li>
-      <li class='menu__item {{ if or (eq .route "all-posts") (eq .route "post")  }} menu__item--active {{ end }}'>
+      <li class='menu__item {{ if or (eq .route "posts-list") (eq .route "post")  }} menu__item--active {{ end }}'>
          <a class="menu__link" href="/posts">Posts</a>
       </li>
       <li class='menu__item {{ if eq .route "editor" }} menu__item--active {{ end }}'>

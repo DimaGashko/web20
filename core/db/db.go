@@ -48,6 +48,6 @@ func autoMigrate() {
 	db.AutoMigrate(
 		&entries.Tag{},
 		&entries.Category{},
-		&entries.Article{},
+		&entries.Post{},
 	)
 }

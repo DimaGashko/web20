@@ -35,9 +35,9 @@
       </ul>
    </section>
 
-   <div class="hp__main-flow container">
-      <main class="hp__main">
-         <h1 class="hp__section-title h1">Latest posts</h1>
+   <div class="hp__main-flow main-flow container">
+      <main class="main-flow__main">
+         <h1 class="hp__section-title h1" id="posts-list-title">Latest posts</h1>
          <section class="posts-list">
             <ul class="posts-list__list">
                {{ range $i, $a := makeSlice 10 }}
@@ -73,97 +73,7 @@
          </section>
       </main>
 
-      <aside class="hp__aside info-aside">
-         <form class="info-aside__search search-field" action>
-            <input type="search" class="search-field__field" placeholder="Type a keyword and hit enter"
-               aria-label="Type a keyword and hit enter">
-            <svg class="search-field__icon icon icon-search">
-               <use xlink:href="#icon-search"></use>
-            </svg>
-         </form>
-         <section class="info-aside__categories categories-list">
-            <h4 class="categories-list__title h4">Categories</h4>
-            <ul class="categories-list__list">
-               <li class="categories-list__item">
-                  <a class="categories-list__link" href="/posts?categories=backend">
-                     <span class="categories-list__name">Courses</span>
-                     <span class="categories-list__counter">(12)</span>
-                  </a>
-               </li>
-               <li class="categories-list__item">
-                  <a class="categories-list__link" href="/posts?categories=backend">
-                     <span class="categories-list__name">News</span>
-                     <span class="categories-list__counter">(23)</span>
-                  </a>
-               </li>
-               <li class="categories-list__item">
-                  <a class="categories-list__link" href="/posts?categories=backend">
-                     <span class="categories-list__name">Guides</span>
-                     <span class="categories-list__counter">(62)</span>
-                  </a>
-               </li>
-               <li class="categories-list__item">
-                  <a class="categories-list__link" href="/posts?categories=backend">
-                     <span class="categories-list__name">Frontend</span>
-                     <span class="categories-list__counter">(44)</span>
-                  </a>
-               </li>
-               <li class="categories-list__item">
-                  <a class="categories-list__link" href="/posts?categories=backend">
-                     <span class="categories-list__name">Backend</span>
-                     <span class="categories-list__counter">(8)</span>
-                  </a>
-               </li>
-            </ul>
-         </section>
-         <section class="info-aside__tags tags-list">
-            <h4 class="tags-list__title h4">Tags</h4>
-            <ul class="tags-list__list">
-               <li class="tags-list__item tag tag--link tag--has-hover">
-                  <a class="tag__link" href="/posts?tags=?">html</a>
-               </li>
-               <li class="tags-list__item tag tag--link tag--has-hover">
-                  <a class="tag__link" href="/posts?tags=?">css</a>
-               </li>
-               <li class="tags-list__item tag tag--link tag--has-hover">
-                  <a class="tag__link" href="/posts?tags=?">js</a>
-               </li>
-               <li class="tags-list__item tag tag--link tag--has-hover">
-                  <a class="tag__link" href="/posts?tags=?">TypeScript</a>
-               </li>
-               <li class="tags-list__item tag tag--link tag--has-hover">
-                  <a class="tag__link" href="/posts?tags=?">flexbox</a>
-               </li>
-               <li class="tags-list__item tag tag--link tag--has-hover">
-                  <a class="tag__link" href="/posts?tags=?">golang</a>
-               </li>
-               <li class="tags-list__item tag tag--link tag--has-hover">
-                  <a class="tag__link" href="/posts?tags=?">g</a>
-               </li>
-               <li class="tags-list__item tag tag--link tag--has-hover">
-                  <a class="tag__link" href="/posts?tags=?">lorem fsa fsfasd fasjdjfkasdf </a>
-               </li>
-               <li class="tags-list__item tag tag--link tag--has-hover">
-                  <a class="tag__link" href="/posts?tags=?">VS Code</a>
-               </li>
-               <li class="tags-list__item tag tag--link tag--has-hover">
-                  <a class="tag__link" href="/posts?tags=?">design</a>
-               </li>
-               <li class="tags-list__item tag tag--link tag--has-hover">
-                  <a class="tag__link" href="/posts?tags=?">prolog</a>
-               </li>
-               <li class="tags-list__item tag tag--link tag--has-hover">
-                  <a class="tag__link" href="/posts?tags=?">svn</a>
-               </li>
-               <li class="tags-list__item tag tag--link tag--has-hover">
-                  <a class="tag__link" href="/posts?tags=?">git</a>
-               </li>
-               <li class="tags-list__item tag tag--link tag--has-hover">
-                  <a class="tag__link" href="/posts?tags=?">linux</a>
-               </li>
-            </ul>
-         </section>
-      </aside>
+      <aside class="main-flow__aside">{{ template "info-aside" . }}</aside>
    </div>
 </div>
 {{ end }}
