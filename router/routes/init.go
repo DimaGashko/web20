@@ -14,16 +14,21 @@ import (
 
 func Init(r *mux.Router) {
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("frontend/dist/static"))))
-	r.NotFoundHandler = h(common.Send404Error)
+	r.NotFoundHandler = ssr(common.Send404Error)
 
-	r.Handle("/", h(home.Home)).Methods("GET", "HEAD").Name("home")
-	r.Handle("/posts", h(posts.List)).Methods("GET", "HEAD").Name("posts-list")
-	r.Handle("/posts/{slug}", h(posts.Post)).Methods("GET", "HEAD").Name("post")
-	r.Handle("/editor/new", h(editor.Editor)).Methods("GET", "HEAD").Name("editor")
-	r.Handle("/about", h(info.About)).Methods("GET", "HEAD").Name("about")
-	r.Handle("/contact-us", h(info.ContactUs)).Methods("GET", "HEAD").Name("contact-us")
+	r.Handle("/", ssr(home.Home)).Methods("GET", "HEAD").Name("home")
+	r.Handle("/posts", ssr(posts.List)).Methods("GET", "HEAD").Name("posts-list")
+	r.Handle("/posts/{slug}", ssr(posts.Post)).Methods("GET", "HEAD").Name("post")
+	r.Handle("/editor/new", ssr(editor.Editor)).Methods("GET", "HEAD").Name("editor")
+	r.Handle("/about", ssr(info.About)).Methods("GET", "HEAD").Name("about")
+	r.Handle("/contact-us", ssr(info.ContactUs)).Methods("GET", "HEAD").Name("contact-us")
+	r.Handle("/privacy", ssr(info.Privacy)).Methods("GET", "HEAD").Name("privacy")
 }
 
-func h(handler common.RouteHandler) common.HttpHandler {
+func ssr(handler common.RouteHandler) common.HttpHandler {
+	return common.HttpHandler{HandlerFunc: handler}
+}
+
+func api(handler common.RouteHandler) common.HttpHandler {
 	return common.HttpHandler{HandlerFunc: handler}
 }

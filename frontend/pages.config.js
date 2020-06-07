@@ -5,6 +5,7 @@ const pages = [
    page('posts-list', './pages/posts-list'),
    page('about', './pages/about'),
    page('contact-us', './pages/contact-us'),
+   page('privacy', './pages/privacy'),
 ];
 
 const errorPages = [

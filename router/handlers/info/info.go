@@ -13,3 +13,7 @@ func About(w http.ResponseWriter, r *http.Request, context map[string]interface{
 func ContactUs(w http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
 	return templates.PATH + "contact-us.tmpl", nil
 }
+
+func Privacy(w http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
+	return templates.PATH + "privacy.tmpl", nil
+}
