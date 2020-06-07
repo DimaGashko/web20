@@ -7,7 +7,7 @@ html {
    color: $color-text;
    font-weight: $weight-primary;
 
-   //min-width: 300px;
+   min-width: 300px;
 }
 
 *,
@@ -23,6 +23,7 @@ a {
 
 .link {
    color: $color-secondary;
+   font-weight: 400;
 
    &:hover {
       text-decoration: underline;

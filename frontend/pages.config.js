@@ -3,6 +3,8 @@ const pages = [
    page('post', './pages/post'),
    page('editor', './pages/editor'),
    page('posts-list', './pages/posts-list'),
+   page('about', './pages/about'),
+   page('contact-us', './pages/contact-us'),
 ];
 
 const errorPages = [
