@@ -8,6 +8,7 @@ require (
 	github.com/jinzhu/gorm v1.9.12
 	github.com/lib/pq v1.6.0
 	github.com/microcosm-cc/bluemonday v1.0.2
+	github.com/rs/cors v1.7.0
 	github.com/russross/blackfriday/v2 v2.0.1
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 )

@@ -1,0 +1,52 @@
+.post-form__fields-list {
+   @include a11y-list;
+}
+
+.post-form__field {
+   margin-top: var(--page-padding);
+
+   &:first-child {
+      margin-bottom: 0;
+   }
+
+   &--error {
+      .post-form__control {
+         background-color: rgba($color-error, 0.1);
+         border-color: $color-error;
+      }
+   }
+}
+
+.post-form__label {
+   display: block;
+   margin-bottom: 4px;
+   font-weight: 400;
+}
+
+.post-form__field-help {
+   margin: 0;
+   margin-bottom: 4px;
+   color: $color-text-secondary;
+}
+
+.post-form__help-link {
+   font-weight: 400;
+
+   &:hover {
+      text-decoration: underline;
+   }
+}
+
+.post-form__control {
+   &--content {
+      min-height: 300px;
+      height: 50vh;
+      max-height: 1000px;
+   }
+}
+
+.post-form__error {
+   color: $color-error;
+   margin-top: 4px;
+   font-weight: 400;
+}

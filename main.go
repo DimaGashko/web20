@@ -11,6 +11,7 @@ import (
 	"syscall"
 
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 	"web20.tk/core/db"
 	"web20.tk/router/handlers/common"
 	appRouter "web20.tk/router/routes"
@@ -57,10 +58,11 @@ func parseAppConfig(configPath string) {
 func runServer() {
 	router := mux.NewRouter()
 	appRouter.Init(router)
+	corsWrapper := cors.Default().Handler(router)
 	listen := fmt.Sprintf(":%d", common.AppConfig.Port)
 	fmt.Printf("SSR server is running on port %d\n", common.AppConfig.Port)
 	go func() {
-		err := http.ListenAndServe(listen, router)
+		err := http.ListenAndServe(listen, corsWrapper)
 		if err != nil {
 			fmt.Println("ListenAndServe Failed")
 			panic(err)

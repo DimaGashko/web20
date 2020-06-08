@@ -24,6 +24,8 @@
    @include breakpoint($mobile) {
       flex: calc(50% - var(--gap));
       margin: calc(var(--gap) / 2);
+
+      flex-grow: 0;
    }
 }
 

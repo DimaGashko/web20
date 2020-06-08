@@ -1,5 +1,6 @@
 {
    "port": 9191,
+   "app-url": "http://localhost:9999",
 
    "db": {
       "port": 5432,
@@ -8,4 +9,5 @@
       "pass": "14159265",
       "name": "web20"
    }
+
 }

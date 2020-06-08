@@ -1,0 +1,63 @@
+.editor {
+   &[data-mode="preview"] {
+      .editor__preview {
+         display: block;
+      }
+
+      .editor__edit {
+         display: none;
+      }
+   }
+}
+
+.editor__main {
+   position: relative;
+}
+
+.editor__preview {
+   display: none;
+}
+
+.editor__title {
+   max-width: calc(100% - 50px);
+}
+
+.editor__switch-btn {
+   @include btn;
+
+   position: absolute;
+   top: 0;
+   right: 0;
+
+   display: flex;
+   align-items: center;
+
+   font-size: 24px;
+
+   transition: transform .3s;
+   outline: none;
+
+   &:hover,
+   &:focus {
+      transform: scale(1.5)
+   }
+}
+
+.editor__error {
+   margin: 0;
+   margin-bottom: 4px;
+   color: $color-error;
+   font-weight: 400;
+}
+
+.editor__controls {
+   margin-top: var(--page-padding);
+}
+
+.editor__error {
+   display: none;
+
+   &--visible {
+      display: block;
+   }
+}

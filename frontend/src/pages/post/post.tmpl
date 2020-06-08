@@ -9,7 +9,7 @@
       <h1 class="h1">{{ .post.Title }}</h1>
       <p class="post-page__description">{{ .post.Description }}</p>
       <div class="post-page__img-container">
-         <img class="post-page__img" src="https://picsum.photos/500/350" width="500" height="350" alt="{{ .post.Title }}">
+         <img class="post-page__img" src="{{ .post.Image }}" width="500" height="350" alt="{{ .post.Title }}">
       </div>
       <div class="post-page__content">{{ .post.Content.Html }}</div>
    </main>

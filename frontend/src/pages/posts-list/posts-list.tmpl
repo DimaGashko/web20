@@ -5,25 +5,27 @@
 
 {{ define "content" }}
 <div class="post-page page-container container main-flow">
-   <main class="main-flow__main posts-list">
-      <h1 class="h1">All posts</h1>
+   <main class="main-flow__main">
+      {{ if len .posts }}
+      <section class=" posts-list">
+         <h1 class="h1">All posts</h1>
          <ul class="posts-list__list">
-            {{ range $i, $a := makeSlice 20 }}
+            {{ range .posts }}
             <li class="posts-list__item">
                <article class="post">
-                  <a class="post__list" href="#">
+                  <a class="post__link" href="/posts/{{ .Slug }}">
                      <figure class="post__figure">
                         <div class="post__img-container">
-                           <img class="post__img" src="https://picsum.photos/500/350?{{ $i }}" width="500" height="350"
-                              alt="title" loading="lazy">
+                           <img class="post__img" src="{{ .Image }}" width="500" height="350" alt="title"
+                              loading="lazy">
                         </div>
                         <figcaption class="post__label">
                            <div class="post__meta">
-                              <div class="category">Guide</div>
-                              <time class="post__date" datetime="">March 15, 2018</time>
+                              <div class="category">{{ .Category.Value }}</div>
+                              <time class="post__date"
+                                 datetime=".CreatedAt">{{ .CreatedAt.Format "Jan 02, 2006" }}</time>
                            </div>
-                           <strong class="post__title">There's a New Way to Make titles to posts Lorem ipsum
-                              dolor</strong>
+                           <strong class="post__title">{{ .Title }}</strong>
                         </figcaption>
                      </figure>
                   </a>
@@ -31,6 +33,18 @@
             </li>
             {{ end }}
          </ul>
+      </section>
+      {{ else }}
+      <p>There's no any post.<br>
+         But you can
+         <a class="posts-list__more link link--arrow" href="/editor/new">
+            create one
+            <svg class="link__arrow icon icon-arrow-right2">
+               <use xlink:href="#icon-arrow-right2"></use>
+            </svg>
+         </a>
+      </p>
+      {{ end }}
    </main>
 
    <aside class="main-flow__aside">{{ template "info-aside" . }}</aside>

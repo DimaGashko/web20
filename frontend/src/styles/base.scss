@@ -69,7 +69,8 @@ figure {
    margin: 0;
 }
 
-b, strong {
+b,
+strong {
    font-weight: 400;
 }
 
@@ -107,4 +108,42 @@ b, strong {
 
 .h4 {
    font-size: 1.2rem;
+}
+
+.btn {
+   @include btn;
+
+   padding: 0.5em 1.4em;
+   font-size: 18px;
+   font-weight: 400;
+   background-color: $color-secondary;
+   color: #fff;
+
+   transition: filter .3s;
+   outline: none;
+
+   &:hover,
+   &:focus {
+      filter: brightness(0.8);
+   }
+}
+
+textarea {
+   resize: vertical;
+   height: 120px;
+   min-height: 80px;
+   max-height: 300px;
+}
+
+address {
+   font-style: normal;
+}
+
+.form-control {
+   display: block;
+   width: 100%;
+
+   padding: 1em;
+   background-color: transparent;
+   border: 1px solid rgba(0,0,0,.2);
 }
