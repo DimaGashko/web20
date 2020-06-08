@@ -60,8 +60,8 @@ func runServer() {
 	appRouter.Init(router)
 	corsWrapper := cors.New(cors.Options{
 		AllowedOrigins:   []string{common.AppConfig.AppUrl},
-		AllowCredentials: true,
 		AllowedMethods:   []string{"HEAD", "GET", "POST", "PUT"},
+		AllowCredentials: true,
 	}).Handler(router)
 
 	listen := fmt.Sprintf(":%d", common.AppConfig.Port)
