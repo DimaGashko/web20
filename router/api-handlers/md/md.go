@@ -18,7 +18,7 @@ func Md2Html(w http.ResponseWriter, r *http.Request) (interface{}, error) {
 
 	md, ok := body["md"]
 	if !ok {
-		return resp, common.New(http.StatusBadRequest)
+		return resp, common.New("'md' field is empty", http.StatusBadRequest)
 	}
 
 	resp["html"] = entries.Md(md.(string)).Html()

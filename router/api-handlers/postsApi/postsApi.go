@@ -2,6 +2,7 @@ package postsApi
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"math/rand"
@@ -13,6 +14,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/gosimple/slug"
 	"web20.tk/core/db"
+	"web20.tk/core/txt"
 	"web20.tk/entries"
 	"web20.tk/router/handlers/common"
 )
@@ -62,7 +64,7 @@ func Update(w http.ResponseWriter, r *http.Request) (interface{}, error) {
 	res := conn.Where(`slug = ?`, slug).First(&curPost)
 
 	if res.RowsAffected == 0 {
-		return nil, common.New404()
+		return nil, common.New404(txt.POST_404)
 	}
 
 	var post entries.Post
@@ -72,7 +74,10 @@ func Update(w http.ResponseWriter, r *http.Request) (interface{}, error) {
 	}
 
 	if curPost.Secret != post.Secret {
-		return nil, common.New403()
+		return nil, &common.AppError{
+			Code: 404,
+			Err:  errors.New(txt.POST_403),
+		}
 	}
 
 	if post.Image != curPost.Image {

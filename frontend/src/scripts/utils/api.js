@@ -16,11 +16,9 @@ export async function getTextOfApiException(exception) {
    }
 
    if ('ok' in exception) {
-      console.log(exception);
-      return `${exception.statusText}`;
+      return (await exception.json()).error;
    }
 
    console.error(exception);
-
    return BASE_TXT.NetworkError;
 }

@@ -27,7 +27,7 @@ func Post(w http.ResponseWriter, r *http.Request, context map[string]interface{}
 	res := conn.Where(`slug = ?`, slug).First(&entries.Post{})
 
 	if res.RowsAffected == 0 {
-		return "", common.New404()
+		return "", common.New404("")
 	}
 
 	context["post"] = res.Value

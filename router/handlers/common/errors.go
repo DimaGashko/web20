@@ -6,8 +6,8 @@ import (
 )
 
 type AppError struct {
-	Err  error
-	Code int
+	Err  error `json:"error"`
+	Code int   `json:"code"`
 }
 
 func (e AppError) Error() string {
@@ -22,23 +22,26 @@ func WrapError(err error, code int) *AppError {
 	return &AppError{err, code}
 }
 
-func New(code int) *AppError {
-	return MakeError("", code)
+func New(msg string, code int) *AppError {
+	return MakeError(msg, code)
 }
 
-func New403() *AppError {
-	return New(http.StatusForbidden)
+func New403(msg string) *AppError {
+	return New(msg, http.StatusForbidden)
 }
 
-func New404() *AppError {
-	return New(http.StatusNotFound)
+func New404(msg string) *AppError {
+	return New(msg, http.StatusNotFound)
 }
 
-func New500() *AppError {
-	return New(http.StatusInternalServerError)
+func New500(msg string) *AppError {
+	return New(msg, http.StatusInternalServerError)
 }
 
 func MakeError(msg string, code int) *AppError {
+	if msg == "" {
+		msg = http.StatusText(code)
+	}
 	return WrapError(errors.New(msg), code)
 }
 
