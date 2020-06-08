@@ -19,6 +19,10 @@ func Init(r *mux.Router) {
 	r.StrictSlash(true)
 
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("frontend/dist/static"))))
+	r.HandleFunc("/robots.txt", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "frontend/dist/static/robots.txt")
+	})
+
 	r.NotFoundHandler = ssr(common.Send404Error)
 
 	r.Handle("/", ssr(home.Home)).Methods("GET", "HEAD").Name("home")

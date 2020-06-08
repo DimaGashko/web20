@@ -11,6 +11,7 @@ const HtmlReplaceWebpackPlugin = require('html-replace-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
+const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { spawn } = require('child_process');
@@ -254,7 +255,7 @@ module.exports = ((env = {}) => {
 
          ...(!env.noNotify ? [
             new WebpackNotifierPlugin({
-               title: 'Giggster Webpack',
+               title: 'Web2.0',
                contentImage: PATHS.logo,
                excludeWarnings: isDev,
             }),
@@ -275,10 +276,16 @@ module.exports = ((env = {}) => {
             defaultAttribute: 'defer',
          }),
 
+         new CopyPlugin([{
+            from: path.resolve(PATHS.src, 'other/robots.txt'),
+            to: `${PATHS.dist}/static/robots.txt`,
+            toType: 'file',
+         }]),
+
          ...(compact ? [
             new FriendlyErrorsWebpackPlugin({
                compilationSuccessInfo: {
-                  messages: [chalk.green('Giggster (SSR Frontend)')],
+                  messages: [chalk.green('Web2.0 (SSR Frontend)')],
                   notes: [
                      chalk`To create a production build run {blue npm run build}`,
                      (isServe) ? chalk`Project is running at {blue http://localhost:${SERVE_PORT}}` : '',

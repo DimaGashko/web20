@@ -1,5 +1,5 @@
 .header {
-   padding: 10px 0;
+   padding: 5px 0;
    height: 64px;
    color: $color-bg;
    background-color: $color-primary;
@@ -13,7 +13,7 @@
 }
 
 .header__socials {
-   margin-right: 48px;
+   margin-right: 16px;
 
    @include breakpoint($mobile) {
       margin-right: 64px;

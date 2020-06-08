@@ -7,6 +7,8 @@
    <link rel="icon" type="image/png" href="~@/img/logo.png" />
    <title>{{ template "title" .}}</title>
 
+   {{ template "meta" . }}
+
    <link rel="preload" as="font" href="~@/fonts/josefin/JosefinSans-Light.woff2" crossorigin>
    <link rel="preload" as="font" href="~@/fonts/josefin/JosefinSans-Regular.woff2" crossorigin>
    <link rel="preload" as="font" href="~@/fonts/josefin/JosefinSans-SemiBold.woff2" crossorigin>
@@ -40,3 +42,27 @@
 </html>
 
 {{ define "title" -}} Web2.0 | Everything you want to know about web {{- end }}
+
+{{ define "description" -}}
+   Web2.0 is a blog covering Frontend, Backend and other IT related topics and news. Published by
+      Dmitry Gashko, web developer at Postindustria, many other developers and just cool people - anyone can create a post here.
+{{ end }}
+
+{{ define "og:img" -}}  https://web20.tk<%= require("@/img/web20.jpg") %> {{- end }}
+
+{{ define "og:url" -}} https://web20.tk {{ end }}
+
+{{ define "meta" }}
+<meta name="description" content='{{ template "description" .}}'>
+
+<meta property="og:url" content='{{ template "og:url" .}}'>
+<meta property="og:type" content="website">
+<meta property="og:title" content='{{ template "title" .}}'>
+<meta property="og:description" content='{{ template "description" .}}'>
+<meta property="og:image" content='{{ template "og:img" .}}'>
+
+<meta name="twitter:title" content='{{ template "title" .}}'>
+<meta name="twitter:description" content='{{ template "description" .}}'>
+<meta name="twitter:image" content='{{ template "og:img" .}}'>
+<meta name="twitter:card" content="summary_large_image">
+{{ end }}
