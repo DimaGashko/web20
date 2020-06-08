@@ -12,7 +12,7 @@ import (
 
 func Home(w http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
 	conn := db.Get()
-	posts := conn.Where("listed = true").Limit(10).Find(&[]entries.Post{})
+	posts := conn.Where("listed = true").Order("created_at").Limit(10).Find(&[]entries.Post{})
 
 	context["posts"] = posts.Value
 
