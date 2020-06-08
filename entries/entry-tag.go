@@ -6,5 +6,5 @@ import (
 
 type Tag struct {
 	gorm.Model
-	Name string `gorm:"name"`
+	Value string `gorm:"value"`
 }

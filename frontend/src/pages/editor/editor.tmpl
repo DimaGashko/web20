@@ -2,8 +2,105 @@
 {{ define "scripts" }}<%= htmlWebpackPlugin.tags.bodyTags %>{{ end }}
 
 {{ define "content" }}
-<section class="container page-container">
-   <h1>Web2.0 Editor</h1>
-   <p>Create Your own post on Web2.0</p>
-</section>
+<div class="editor page-container container main-flow editor-js">
+   <main class="main-flow__main editor__main">
+      <section class="editor__edit">
+         <button class="editor__switch-btn switch-btn-js" data-mode="preview" aria-label="preview"
+            title="Switch in preview mode">
+            <svg class="icon icon-image">
+               <use xlink:href="#icon-image"></use>
+            </svg>
+         </button>
+         <h1 class="editor__title h1">Create a new post</h1>
+
+         <form class="post-form post-form-js" action>
+            <ul class="post-form__fields-list">
+               <li class="post-form__field">
+                  <label class="post-form__label" for="category">Category</label>
+                  <select class="post-form__control form-control" name="category" id="category">
+                     <option value="new">News</option>
+                     <option value="guides">Guides</option>
+                     <option value="experiments">Experiments</option>
+                     <option value="stories">Stories</option>
+                     <option value="other">Other</option>
+                  </select>
+               </li>
+
+               <li class="post-form__field">
+                  <label class="post-form__label" for="title">Title</label>
+                  <input class="post-form__control form-control" name="title" id="title" maxlength="255" required>
+               </li>
+
+               <li class="post-form__field">
+                  <label class="post-form__label" for="image">Image url</label>
+                  <p class="post-form__field-help">Enter url of a post img or leave empty to use a random one</p>
+                  <input class="post-form__control form-control" type="url" name="image" id="image"
+                     data-pristine-pattern="/https?:\/\/.+/i" data-pristine-pattern-message="Enter a valid URL" maxlength="255">
+               </li>
+
+               <li class="post-form__field">
+                  <label class="post-form__label" for="description">Description (introduction)</label>
+                  <textarea class="post-form__control form-control" name="description" id="description"
+                     maxlength="1000" required></textarea>
+               </li>
+
+               <li class="post-form__field">
+                  <label class="post-form__label" for="img">Content</label>
+                  <p class="post-form__field-help">
+                     You can use markdown syntax. See
+                     <a class="post-form__help-link" href="https://guides.github.com/features/mastering-markdown/"
+                        @blank>Markdown guide</a>
+                     for details
+                  </p>
+                  <textarea class="post-form__control post-form__control--content form-control" name="content"
+                     id="content" required maxlength="100000"></textarea>
+               </li>
+
+               <li class="post-form__field">
+                  <label class="post-form__label" for="tags">Tags</label>
+                  <p class="post-form__field-help">Comma separated if multiple</p>
+                  <input class="post-form__control form-control" name="tags" id="tags" maxlength="255">
+               </li>
+
+               <li class="post-form__field">
+                  <label class="post-form__label" for="pwd">Author</label>
+                  <input class="post-form__control form-control" name="author" id="author" autocomplete="username"
+                     maxlength="25">
+               </li>
+
+               <li class="post-form__field">
+                  <label class="post-form__label" for="password">Post's secret</label>
+                  <p class="post-form__field-help">Password you will use to edit the post (default: web20)</p>
+                  <input class="post-form__control form-control" type="password" name="password" id="password"
+                     autocomplete="new-password" maxlength="25">
+               </li>
+            </ul>
+
+            <button hidden></button>
+         </form>
+      </section>
+
+      <section class="editor__preview preview post-page">
+         <button class="editor__switch-btn switch-btn-js" data-mode="edit" aria-label="edit"
+            title="Switch in edit mode">
+            <svg class="icon icon-pencil">
+               <use xlink:href="#icon-pencil"></use>
+            </svg>
+         </button>
+         <h1 class="editor__title h1 preview-title-js"></h1>
+         <p class="post-page__description preview-description-js"></p>
+         <div class="post-page__img-container">
+            <img class="post-page__img preview-img-js" alt="">
+         </div>
+         <div class="post-page__content preview-content-js"></div>
+      </section>
+
+      <section class="editor__controls" aria-label="control section">
+         <p class="editor__error">Something went wrong</p>
+         <button class="btn submit-post-js">Post the post</button>
+      </section>
+   </main>
+
+   <aside class="main-flow__aside">{{ template "info-aside" . }}</aside>
+</div>
 {{ end }}

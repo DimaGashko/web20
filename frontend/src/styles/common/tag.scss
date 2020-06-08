@@ -23,8 +23,10 @@
 
    &--has-hover {
       transition: filter .3s;
+      outline: none;
 
-      &:hover {
+      &:hover,
+      &:focus {
          filter: brightness(0.9);
       }
    }
