@@ -6,14 +6,13 @@ import (
 
 type Post struct {
 	gorm.Model
-	Slug        string   `gorm:"slug;unique_index" json:"slug"`
-	Title       string   `gorm:"title" json:"title"`
-	Image       string   `gorm:"image" json:"image"`
-	Description string   `gorm:"description" json:"description"`
-	Content     Md       `gorm:"content" json:"content"`
-	Author      string   `gorm:"author" json:"author"`
-	Listed      bool     `gorm:"listed" json:"listed"`
-	Secret      string   `gorm:"secret" json:"secret"`
-	Category    Category `gorm:"category;foreignkey:Category" json:"category"`
-	Tags        []Tag
+	Slug        string `gorm:"slug;unique_index;not null" json:"slug"`
+	Title       string `gorm:"title;not null" json:"title"`
+	Image       string `gorm:"image;not null" json:"image"`
+	Description string `gorm:"description;not null" json:"description"`
+	Content     Md     `gorm:"content;not null" json:"content"`
+	Author      string `gorm:"author;" json:"author"`
+	Listed      bool   `gorm:"listed;not null" json:"listed"`
+	Secret      string `gorm:"secret;not null" json:"secret"`
+	Category    string `gorm:"category;not null" json:"category"`
 }
