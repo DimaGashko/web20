@@ -80,7 +80,7 @@ function initEvents() {
 }
 
 async function submit() {
-   if (!validator.validate()) return;
+   if (!validate()) return;
    updatePostData();
 
    try {

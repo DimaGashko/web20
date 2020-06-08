@@ -12,7 +12,7 @@
             <use xlink:href="#icon-pencil"></use>
          </svg>
       </a>
-      <h1 class="h1">{{ .post.Title }}</h1>
+      <h1 class="h1">{{ .post.Title }} <div class="category">{{ .post.Category }}</div></h1>
       <p class="post-page__description">{{ .post.Description }}</p>
       <div class="post-page__img-container">
          <img class="post-page__img" src="{{ .post.Image }}" width="500" height="350" alt="{{ .post.Title }}">

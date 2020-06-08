@@ -8,13 +8,16 @@ import (
 
 	"github.com/gorilla/mux"
 	"web20.tk/core/db"
+	"web20.tk/entries"
 	"web20.tk/templates"
 )
 
 var AppConfig struct {
-	Port   int       `json:"port"`
-	AppUrl string    `json:"app-url"`
-	Db     db.Config `json:"db"`
+	Port         int       `json:"port"`
+	AppUrl       string    `json:"app-url"`
+	Db           db.Config `json:"db"`
+	TopPosts     []string  `json:"top-posts"`
+	PopularPosts []string  `json:"popular-posts"`
 }
 
 type RouteHandler func(http.ResponseWriter, *http.Request, map[string]interface{}) (string, error)
@@ -157,5 +160,17 @@ func initLayout(w http.ResponseWriter, r *http.Request, context map[string]inter
 
 	context["route"] = routeName
 	context["year"] = time.Now().Year()
+
+	conn := db.Get()
+
+	var popularPosts []entries.Post
+	var topPosts []entries.Post
+
+	conn.Where("slug IN (?)", AppConfig.PopularPosts).Find(&popularPosts)
+	conn.Where("slug IN (?)", AppConfig.TopPosts).Find(&topPosts)
+
+	context["popularPosts"] = popularPosts
+	context["topPosts"] = topPosts
+
 	return nil
 }

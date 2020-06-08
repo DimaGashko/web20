@@ -15,27 +15,11 @@
       <div class="footer__latest footer__group footer-latest">
          <h2 class="footer__title">Top posts</h2>
          <ul class="footer-latest__list">
+            {{ range .topPosts }}
             <li class="footer-latest__item">
-               <a class="footer-latest__link" href="/posts/post1">How I Used Brotli to Get Even Smaller CSS and
-                  JavaScript Files at CDN Scale</a>
+               <a class="footer-latest__link" href="/posts/{{ .Slug }}">{{ .Title }}</a>
             </li>
-            <li class="footer-latest__item">
-               <a class="footer-latest__link" href="/posts/post2">Understand why CSS has no effect with the Inactive CSS
-                  rules indicator in Firefox DevTools</a>
-            </li>
-            <li class="footer-latest__item">
-               <a class="footer-latest__link" href="/posts/post3">The Best Design System Tool is Slack</a>
-            </li>
-            <li class="footer-latest__item">
-               <a class="footer-latest__link" href="/posts/post3">Adding CSS to a Page via HTTP Headers</a>
-            </li>
-            <li class="footer-latest__item">
-               <a class="footer-latest__link" href="/posts/post3">On fixed elements and backgrounds</a>
-            </li>
-            <li class="footer-latest__item">
-               <a class="footer-latest__link" href="/posts/post2">Understand why CSS has no effect with the Inactive CSS
-                  rules indicator in Firefox DevTools</a>
-            </li>
+            {{ end }}
          </ul>
       </div>
 

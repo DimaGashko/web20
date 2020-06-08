@@ -7,25 +7,20 @@
 <div class="hp page-container">
    <section class="hp__popular popular container" aria-label="popular posts">
       <ul class="popular__list">
-         {{ range $i, $a := makeSlice 4 }}
+         {{ range $i, $a := .popularPosts }}
          <li class="popular__item">
             <article class="popular-post">
-               <a class="popular-post__link" href="#">
+               <a class="popular-post__link" href="/posts/{{ .Slug }}">
                   <figure class="popular-post__figure">
-                     <img class="popular-post__img" src="https://picsum.photos/1200/800?{{ $i }}" width="1200"
-                        height="800" alt="post's title" {{ if ge $i 2 }} loading="lazy" {{ end }}>
+                     <img class="popular-post__img" src="{{ .Image }}" width="1200"
+                        height="800" alt="{{ .Title }}" {{ if ge $i 2 }} loading="lazy" {{ end }}>
                      <figcaption class="popular-post__label">
                         <div class="popular-post__meta">
-                           <div class="popular-post__category category">News</div>
-                           <tim class="popular-post__date" datetime="">March 15, 2018</time>
+                           <div class="popular-post__category category">{{ .Category }}</div>
+                           <tim class="popular-post__date" datetime="{{ .CreatedAt }}">{{ .CreatedAt.Format "Jan 02, 2006" }}</time>
                         </div>
-                        <strong class="popular-post__title h3">There's a New Way to Make titles to posts Lorem ipsum
-                           dolor
-                           sit, amet consectetur adipisicing elit. Ab vel quia reprehenderit quas nisi facere
-                           consequuntur et quos pariatur eius.</strong>
-                        <p class="popular-post__description">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                           Quibusdam ipsum at nemo facilis, eos rem nulla nihil itaque adipisci, nisi mollitia quam
-                           possimus architecto!</p>
+                        <strong class="popular-post__title h3">{{ .Title }}</strong>
+                        <p class="popular-post__description">{{ .Description }}</p>
                      </figcaption>
                   </figure>
                </a>
