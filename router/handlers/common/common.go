@@ -16,6 +16,7 @@ var AppConfig struct {
 	Port         int       `json:"port"`
 	AppUrl       string    `json:"app-url"`
 	Db           db.Config `json:"db"`
+	PostAbout    string    `json:"post-about"`
 	TopPosts     []string  `json:"top-posts"`
 	PopularPosts []string  `json:"popular-posts"`
 }
@@ -179,6 +180,7 @@ func initLayout(w http.ResponseWriter, r *http.Request, context map[string]inter
 	conn.Where("slug IN (?)", AppConfig.PopularPosts).Find(&popularPosts)
 	conn.Where("slug IN (?)", AppConfig.TopPosts).Find(&topPosts)
 
+	context["postAbout"] = AppConfig.PostAbout
 	context["popularPosts"] = popularPosts
 	context["topPosts"] = topPosts
 
