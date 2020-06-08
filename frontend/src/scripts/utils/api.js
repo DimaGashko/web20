@@ -16,7 +16,8 @@ export async function getTextOfApiException(exception) {
    }
 
    if ('ok' in exception) {
-      return (await exception.json()).error;
+      console.log(exception);
+      return `${exception.statusText}`;
    }
 
    console.error(exception);

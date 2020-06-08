@@ -10,6 +10,7 @@ import (
 	"os/exec"
 	"time"
 
+	"github.com/gorilla/mux"
 	"github.com/gosimple/slug"
 	"web20.tk/core/db"
 	"web20.tk/entries"
@@ -37,20 +38,15 @@ func Create(w http.ResponseWriter, r *http.Request) (interface{}, error) {
 	}
 
 	now := fmt.Sprint((time.Now().Unix() % 1e4) + rand.Int63n(10000))
-	post.Slug = now + "-" + slug.Make("SHA1 Collision")
+	post.Slug = now + "-" + slug.Make(post.Title)
 
-	if post.Image == "" {
-		post.Image = "https://picsum.photos/1200/800"
-	}
-
-	post.Image, err = downloadImg(post.Image, post.Slug)
+	err = processImg(&post)
 	if err != nil {
 		return "", common.WrapError(err, http.StatusBadRequest)
 	}
 
-	err = optimizeImg(post.Image)
-	if err != nil {
-		return "", common.WrapError(err, http.StatusBadRequest)
+	if post.Secret == "" {
+		post.Secret = "web20"
 	}
 
 	conn.Create(&post)
@@ -59,13 +55,59 @@ func Create(w http.ResponseWriter, r *http.Request) (interface{}, error) {
 }
 
 func Update(w http.ResponseWriter, r *http.Request) (interface{}, error) {
-	resp := make(map[string]interface{})
-	return resp, nil
+	slug := mux.Vars(r)["slug"]
+	conn := db.Get()
+
+	var curPost entries.Post
+	res := conn.Where(`slug = ?`, slug).First(&curPost)
+
+	if res.RowsAffected == 0 {
+		return nil, common.New404()
+	}
+
+	var post entries.Post
+	err := json.NewDecoder(r.Body).Decode(&post)
+	if err != nil {
+		return nil, common.WrapError(err, http.StatusBadRequest)
+	}
+
+	if curPost.Secret != post.Secret {
+		return nil, common.New403()
+	}
+
+	if post.Image != curPost.Image {
+		err := processImg(&post)
+		if err != nil {
+			return "", common.WrapError(err, http.StatusBadRequest)
+		}
+	}
+
+	conn.Save(&post)
+	return post, nil
 }
 
 func Delete(w http.ResponseWriter, r *http.Request) (interface{}, error) {
 	resp := make(map[string]interface{})
 	return resp, nil
+}
+
+func processImg(post *entries.Post) error {
+	var err error
+	if post.Image == "" {
+		post.Image = "https://picsum.photos/1200/800"
+	}
+
+	post.Image, err = downloadImg(post.Image, post.Slug)
+	if err != nil {
+		return err
+	}
+
+	err = optimizeImg(post.Image)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func downloadImg(src, name string) (string, error) {
@@ -94,7 +136,7 @@ func downloadImg(src, name string) (string, error) {
 
 func optimizeImg(path string) error {
 	sysPath := "frontend/dist" + path
-	cmd := exec.Command("convert", sysPath, "-quality", "80", sysPath)
+	cmd := exec.Command("convert", sysPath, "-quality", "79", sysPath)
 	err := cmd.Run()
 	if err != nil {
 		return err

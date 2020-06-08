@@ -58,7 +58,12 @@ func parseAppConfig(configPath string) {
 func runServer() {
 	router := mux.NewRouter()
 	appRouter.Init(router)
-	corsWrapper := cors.Default().Handler(router)
+	corsWrapper := cors.New(cors.Options{
+		AllowedOrigins:   []string{common.AppConfig.AppUrl},
+		AllowCredentials: true,
+		AllowedMethods:   []string{"HEAD", "GET", "POST", "PUT"},
+	}).Handler(router)
+
 	listen := fmt.Sprintf(":%d", common.AppConfig.Port)
 	fmt.Printf("SSR server is running on port %d\n", common.AppConfig.Port)
 	go func() {

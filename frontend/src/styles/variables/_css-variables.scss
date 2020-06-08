@@ -2,6 +2,9 @@
    --page-padding: 16px;
    --page-width: 1140px;
 
+   --weight-primary: 300;
+   --font-primary: 'Josefin Sans', arial, sans-serif;
+
    @include breakpoint($tablet) {
       --page-padding: 32px;
    }
