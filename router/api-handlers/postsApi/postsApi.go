@@ -4,8 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"math/rand"
 	"net/http"
 	"os"
+	"os/exec"
 	"time"
 
 	"github.com/gosimple/slug"
@@ -34,7 +36,7 @@ func Create(w http.ResponseWriter, r *http.Request) (interface{}, error) {
 		return nil, common.WrapError(err, http.StatusBadRequest)
 	}
 
-	now := fmt.Sprint((time.Now().Unix() / 100) % 1e4)
+	now := fmt.Sprint((time.Now().Unix() % 1e4) + rand.Int63n(10000))
 	post.Slug = now + "-" + slug.Make("SHA1 Collision")
 
 	if post.Image == "" {
@@ -42,6 +44,11 @@ func Create(w http.ResponseWriter, r *http.Request) (interface{}, error) {
 	}
 
 	post.Image, err = downloadImg(post.Image, post.Slug)
+	if err != nil {
+		return "", common.WrapError(err, http.StatusBadRequest)
+	}
+
+	err = optimizeImg(post.Image)
 	if err != nil {
 		return "", common.WrapError(err, http.StatusBadRequest)
 	}
@@ -69,8 +76,9 @@ func downloadImg(src, name string) (string, error) {
 	defer response.Body.Close()
 
 	path := fmt.Sprintf("/static/posts/images/%s.jpg", name)
+	sysPath := "./frontend/dist" + path
 
-	file, err := os.Create("frontend/dist" + path)
+	file, err := os.Create(sysPath)
 	if err != nil {
 		return "", err
 	}
@@ -82,4 +90,15 @@ func downloadImg(src, name string) (string, error) {
 	}
 
 	return path, nil
+}
+
+func optimizeImg(path string) error {
+	sysPath := "frontend/dist" + path
+	cmd := exec.Command("convert", sysPath, "-quality", "80", sysPath)
+	err := cmd.Run()
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
