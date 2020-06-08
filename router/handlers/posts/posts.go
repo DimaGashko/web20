@@ -5,6 +5,7 @@ import (
 
 	"web20.tk/core/db"
 	"web20.tk/entries"
+	"web20.tk/router/handlers/common"
 	"web20.tk/templates"
 
 	"github.com/gorilla/mux"
@@ -13,7 +14,7 @@ import (
 
 func List(w http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
 	conn := db.Get()
-	posts := conn.Where("listed = false").Find(&[]entries.Post{})
+	posts := conn.Where("listed = true").Find(&[]entries.Post{})
 
 	context["posts"] = posts.Value
 	return templates.PATH + "posts-list.tmpl", nil
@@ -23,9 +24,13 @@ func Post(w http.ResponseWriter, r *http.Request, context map[string]interface{}
 	slug := mux.Vars(r)["slug"]
 
 	conn := db.Get()
-	post := conn.Where(`slug = ?`, slug).First(&entries.Post{})
+	res := conn.Where(`slug = ?`, slug).First(&entries.Post{})
 
-	context["post"] = post.Value
+	if res.RowsAffected == 0 {
+		return "", common.New404()
+	}
+
+	context["post"] = res.Value
 
 	return templates.PATH + "post.tmpl", nil
 }

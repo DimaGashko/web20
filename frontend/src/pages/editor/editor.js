@@ -3,6 +3,10 @@ import Pristine from 'pristinejs';
 import base from '@/layout/base';
 import infoAside from '@/components/info-aside/info-aside';
 
+import { readJsonData } from '@/scripts/utils/base';
+import { md2html } from '@/scripts/api/helpers';
+import { savePost } from '@/scripts/api/posts';
+
 import '@/styles/common/main-flow.scss';
 import '@/styles/common/categories-list.scss';
 import '@/styles/common/category.scss';
@@ -16,7 +20,7 @@ import './styles/editor.scss';
 import './styles/post-form.scss';
 import './styles/preview.scss';
 import './styles/switch-mode.scss';
-import { md2html } from '@/scripts/api/helpers';
+
 
 const root = document.querySelector('.editor-js');
 
@@ -40,12 +44,24 @@ const validator = new Pristine($form, {
 $form.noValidate = false;
 
 /** @type {Post} */
-const post = {};
+const post = readJsonData('post') || {
+   listed: true,
+   title: '',
+   description: '',
+   content: '',
+   author: '',
+   image: '',
+   //category: '',
+};
+
+post.secret = '';
+
 
 base();
 infoAside();
 
 initEvents();
+updateForm();
 
 function initEvents() {
    root.addEventListener('click', ({ target }) => {
@@ -67,8 +83,15 @@ async function submit() {
    if (!validator.validate()) return;
    updatePostData();
 
-   console.log(post);
-   
+   try {
+      console.log(post);
+      
+      const { slug } = await savePost(post);
+      location.href = `/posts/${slug}`;
+   } catch (e) {
+      if (typeof e !== 'string') throw e;
+      console.error(e);
+   }
 }
 
 /** @param {'preview'|'edit'} mode */
@@ -83,7 +106,7 @@ async function updatePreview() {
    updatePostData();
 
    $title.innerHTML = post.title || 'No title';
-   $description.innerHTML = post.description;
+   $description.innerHTML = post.description || 'No description';
    $content.innerHTML = await getMd();
 
    $img.src = post.image || randomImg();
@@ -95,9 +118,17 @@ function updatePostData() {
    post.content = $form.content.value.trim();
    post.image = $form.image.value.trim();
    post.author = $form.author.value.trim();
-   post.tags = parseTags($form.tags.value);
-   post.category = $form.category.value.trim();
-   post.password = $form.password.value.trim();
+   post.secret = $form.secret.value.trim();
+   post.listed = $form.listed.checked;
+}
+
+function updateForm() {
+   $form.title.value = post.title;
+   $form.description.value = post.description;
+   $form.content.value = post.content;
+   $form.image.value = post.image;
+   $form.author.value = post.author;
+   $form.listed.checked = post.listed;
 }
 
 function parseTags(raw) {

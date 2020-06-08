@@ -11,7 +11,10 @@
                <use xlink:href="#icon-image"></use>
             </svg>
          </button>
-         <h1 class="editor__title h1">Create a new post</h1>
+         <h1 class="editor__title h1">
+            {{ if .post }} Edit the post
+            {{ else }} Create a new post {{ end }}
+         </h1>
 
          <form class="post-form post-form-js" action>
             <ul class="post-form__fields-list">
@@ -34,8 +37,8 @@
                <li class="post-form__field">
                   <label class="post-form__label" for="image">Image url</label>
                   <p class="post-form__field-help">Enter url of a post img or leave empty to use a random one</p>
-                  <input class="post-form__control form-control" type="url" name="image" id="image"
-                     data-pristine-pattern="/https?:\/\/.+/i" data-pristine-pattern-message="Enter a valid URL" maxlength="255">
+                  <input class="post-form__control form-control" name="image" id="image"
+                     data-pristine-pattern="/(https?:\/\/)|(/static/posts/images/).+/i" data-pristine-pattern-message="Enter a valid URL" maxlength="255">
                </li>
 
                <li class="post-form__field">
@@ -59,7 +62,7 @@
                <li class="post-form__field">
                   <label class="post-form__label" for="tags">Tags</label>
                   <p class="post-form__field-help">Comma separated if multiple</p>
-                  <input class="post-form__control form-control" name="tags" id="tags" maxlength="255">
+                  <input class="post-form__control form-control" name="tags" disabled id="tags" maxlength="255">
                </li>
 
                <li class="post-form__field">
@@ -69,10 +72,18 @@
                </li>
 
                <li class="post-form__field">
-                  <label class="post-form__label" for="password">Post's secret</label>
+                  <label class="post-form__label" for="secret">Post's secret</label>
                   <p class="post-form__field-help">Password you will use to edit the post (default: web20)</p>
-                  <input class="post-form__control form-control" type="password" name="password" id="password"
+                  <input class="post-form__control form-control" type="password" name="secret" id="secret"
                      autocomplete="new-password" maxlength="25">
+               </li>
+
+               <li class="post-form__field">
+                  <label class="post-form__label" for="listed">
+                     Listed
+                     <input class="post-form__control" type="checkbox" name="listed" id="listed" maxlength="25">
+                  </label>
+                  <p class="post-form__field-help">If not will be available by link only</p>
                </li>
             </ul>
 
@@ -102,5 +113,7 @@
    </main>
 
    <aside class="main-flow__aside">{{ template "info-aside" . }}</aside>
+
+   <script type="application/json" class="json-data" data-type="post">{{ .post }}</script>
 </div>
 {{ end }}

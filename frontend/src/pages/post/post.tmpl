@@ -5,7 +5,13 @@
 
 {{ define "content" }}
 <div class="post-page page-container container main-flow">
-   <main class="main-flow__main">
+   <main class="main-flow__main post-page__main-flow">
+      <a class="post-page__edit" aria-label="edit" title="Edit this post"
+         href="/editor/edit/{{ .post.Slug }}">
+         <svg class="icon icon-pencil">
+            <use xlink:href="#icon-pencil"></use>
+         </svg>
+      </a>
       <h1 class="h1">{{ .post.Title }}</h1>
       <p class="post-page__description">{{ .post.Description }}</p>
       <div class="post-page__img-container">

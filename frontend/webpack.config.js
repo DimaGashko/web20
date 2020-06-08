@@ -244,13 +244,13 @@ module.exports = ((env = {}) => {
 
          new DotenvPlugin(),
 
-         new CleanWebpackPlugin({
-            cleanStaleWebpackAssets: false,
+         // new CleanWebpackPlugin({
+         //    cleanStaleWebpackAssets: false,
 
-            cleanOnceBeforeBuildPatterns: ['**/*', '../templates/**/*'],
-            dangerouslyAllowCleanPatternsOutsideProject: true,
-            dry: false,
-         }),
+         //    cleanOnceBeforeBuildPatterns: ['**/*', '../templates/**/*'],
+         //    dangerouslyAllowCleanPatternsOutsideProject: true,
+         //    dry: false,
+         // }),
 
          ...(!env.noNotify ? [
             new WebpackNotifierPlugin({

@@ -1,11 +1,11 @@
 @import './variables/css-variables';
 
 html {
-   font-family: $font-primary;
+   font-family: var(--font-primary);
    line-height: 1.5;
 
    color: $color-text;
-   font-weight: $weight-primary;
+   font-weight: var(--weight-primary);
 
    min-width: 300px;
 }
@@ -146,4 +146,20 @@ address {
    padding: 1em;
    background-color: transparent;
    border: 1px solid rgba(0,0,0,.2);
+
+   &:disabled {
+      background-color: $color-skeleton;
+   }
+}
+
+pre, code {
+   white-space: pre-wrap;
+   white-space: break-spaces;
+   font-weight: 300;
+   font-family: var(--font-primary)
+} 
+
+pre {
+   background-color: $color-skeleton;
+   padding: 0.5em 1em;
 }

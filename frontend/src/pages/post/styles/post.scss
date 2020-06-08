@@ -1,5 +1,9 @@
 .post-page {}
 
+.post-page__main-flow {
+   position: relative;
+}
+
 .post-page__img-container {
    @include aspect-ratio(8/13);
 }
@@ -21,4 +25,25 @@
 
 .info-aside .search-field {
    display: none;
+}
+
+.post-page__edit {
+   @include btn;
+
+   position: absolute;
+   top: 0;
+   right: 0;
+
+   display: flex;
+   align-items: center;
+
+   font-size: 16px;
+
+   transition: transform .3s;
+   outline: none;
+
+   &:hover,
+   &:focus {
+      transform: scale(1.5)
+   }
 }

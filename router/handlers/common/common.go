@@ -84,7 +84,10 @@ func (h HttpHandler) serveApi(w http.ResponseWriter, r *http.Request) {
 		SendApiError(err, w, r, context)
 	}
 
-	w.Write(resp)
+	_, err = w.Write(resp)
+	if err != nil {
+		SendApiError(err, w, r, context)
+	}
 }
 
 func (h HttpHandler) handle(w http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
