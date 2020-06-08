@@ -45,13 +45,13 @@ $form.noValidate = false;
 
 /** @type {Post} */
 const post = readJsonData('post') || {
-   listed: true,
+   category: 'news',
    title: '',
    description: '',
    content: '',
    author: '',
    image: '',
-   //category: '',
+   listed: true,
 };
 
 post.secret = '';
@@ -113,6 +113,7 @@ async function updatePreview() {
 }
 
 function updatePostData() {
+   post.category = $form.category.value;
    post.title = $form.title.value.trim();
    post.description = $form.description.value.trim();
    post.content = $form.content.value.trim();
@@ -123,6 +124,7 @@ function updatePostData() {
 }
 
 function updateForm() {
+   $form.category.value = post.category;
    $form.title.value = post.title;
    $form.description.value = post.description;
    $form.content.value = post.content;
@@ -148,4 +150,14 @@ async function getMd() {
 
 function randomImg() {
    return `https://picsum.photos/1200/800?${Date.now()}`;
+}
+
+function validate() {
+   const isValid = validator.validate();
+   
+   if (!isValid) {
+      root.scrollIntoView({ behavior: 'smooth' });
+   }
+
+   return isValid;
 }

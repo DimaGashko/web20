@@ -45,10 +45,7 @@ func Get() *gorm.DB {
 }
 
 func autoMigrate() {
-	print("Automigrating....")
 	db.AutoMigrate(
-		&entries.Tag{},
-		&entries.Category{},
 		&entries.Post{},
 	)
 }
