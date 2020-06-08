@@ -13,7 +13,7 @@ import (
 
 func List(w http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
 	conn := db.Get()
-	posts := conn.Find(&[]entries.Post{})
+	posts := conn.Where("listed = false").Find(&[]entries.Post{})
 
 	context["posts"] = posts.Value
 	return templates.PATH + "posts-list.tmpl", nil
