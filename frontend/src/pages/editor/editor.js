@@ -28,6 +28,7 @@ const root = document.querySelector('.editor-js');
 const $form = root.querySelector('.post-form-js');
 
 const $title = root.querySelector('.preview-title-js');
+const $category = root.querySelector('.category-js');
 const $description = root.querySelector('.preview-description-js');
 const $img = root.querySelector('.preview-img-js');
 const $content = root.querySelector('.preview-content-js');
@@ -106,6 +107,7 @@ async function updatePreview() {
    updatePostData();
 
    $title.innerHTML = post.title || 'No title';
+   $category.innerHTML = post.category;
    $description.innerHTML = post.description || 'No description';
    $content.innerHTML = await getMd();
 
