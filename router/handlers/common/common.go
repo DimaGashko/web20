@@ -20,6 +20,11 @@ var AppConfig struct {
 	PopularPosts []string  `json:"popular-posts"`
 }
 
+type ErrResp struct {
+	Ok    bool   `json:"ok"`
+	Error string `json:"error"`
+}
+
 type RouteHandler func(http.ResponseWriter, *http.Request, map[string]interface{}) (string, error)
 type RouteApiHandler func(http.ResponseWriter, *http.Request) (interface{}, error)
 type HandlerType string
@@ -64,6 +69,8 @@ func (h HttpHandler) serveSsr(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	w.Header().Set("cache-control", "private, max-age=0, no-cache")
+	w.Header().Set("X-Content-Type-Options", "nosniff")
 	w.WriteHeader(http.StatusOK)
 
 	err = t.ExecuteTemplate(w, "base.tmpl", context)
@@ -80,6 +87,9 @@ func (h HttpHandler) serveApi(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.Header().Set("cache-control", "private, max-age=0, no-cache")
+	w.Header().Set("X-Content-Type-Options", "nosniff")
+
 	w.WriteHeader(http.StatusOK)
 
 	resp, err := json.Marshal(context)
@@ -139,16 +149,16 @@ func SendApiError(err error, w http.ResponseWriter, r *http.Request, context int
 
 	fmt.Printf("Couldn't load page: %s ({ msg: '%s', code: %d })", r.URL, err.Error(), code)
 
-	resp, err := json.Marshal(err)
-	if err != nil {
-		SendApiError(err, w, r, context)
-	}
+	errJson, _ := json.Marshal(ErrResp{
+		Ok:    false,
+		Error: err.Error(),
+	})
 
-	w.Write(resp)
+	w.Write(errJson)
 }
 
 func Send404Error(res http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
-	return "", New404()
+	return "", New404("")
 }
 
 func initLayout(w http.ResponseWriter, r *http.Request, context map[string]interface{}) error {

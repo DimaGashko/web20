@@ -32,7 +32,9 @@ const $category = root.querySelector('.category-js');
 const $description = root.querySelector('.preview-description-js');
 const $img = root.querySelector('.preview-img-js');
 const $content = root.querySelector('.preview-content-js');
+const $err = root.querySelector('.err-js');
 
+/** @type {HTMLButtonElement} */
 const $submit = root.querySelector('.submit-post-js');
 
 const validator = new Pristine($form, {
@@ -83,15 +85,20 @@ function initEvents() {
 async function submit() {
    if (!validate()) return;
    updatePostData();
+   
+   $err.classList.remove('editor__error-visible');
+   $submit.disabled = true;
 
    try {
-      console.log(post);
-      
       const { slug } = await savePost(post);
       location.href = `/posts/${slug}`;
    } catch (e) {
       if (typeof e !== 'string') throw e;
+      $err.innerHTML = e;
+      $err.classList.add('editor__error-visible');
       console.error(e);
+   } finally {
+      $submit.disabled = false;
    }
 }
 
