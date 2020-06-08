@@ -17,11 +17,11 @@
          <a class="menu__link" href="/contact-us">Contact</a>
       </li>
       <li class='menu__item {{ if eq .route "about" }} menu__item--active {{ end }}'>
-         <a class="menu__link" href="/about">About</a>
+         <a class="menu__link" href="/posts/{{ .postAbout }}">About</a>
       </li>
       <li class='menu__item'>
          <a class="menu__link" href="https://guides.github.com/features/mastering-markdown/" @blank>Help</a>
       </li>
    </ul>
-</nav>
+</nav> 
 {{ end }}

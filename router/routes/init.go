@@ -26,7 +26,6 @@ func Init(r *mux.Router) {
 	r.Handle("/posts/{slug}", ssr(posts.Post)).Methods("GET", "HEAD").Name("post")
 	r.Handle("/editor/new", ssr(editor.New)).Methods("GET", "HEAD").Name("editor")
 	r.Handle("/editor/edit/{slug}", ssr(editor.Edit)).Methods("GET", "HEAD").Name("editor")
-	r.Handle("/about", ssr(info.About)).Methods("GET", "HEAD").Name("about")
 	r.Handle("/contact-us", ssr(info.ContactUs)).Methods("GET", "HEAD").Name("contact-us")
 	r.Handle("/privacy", ssr(info.Privacy)).Methods("GET", "HEAD").Name("privacy")
 
