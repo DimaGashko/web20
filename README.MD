@@ -7,7 +7,8 @@
 
 Web2.0 is a blog covering Frontend, Backend and other IT related topics and news
 
-Check it out: https://web20.tk
+Web2.0 lives here: https://web20.tk
+Also, you can create a post: https://web20.tk/editor/new
 
 ## Setup
 
