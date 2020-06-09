@@ -7,6 +7,8 @@
 
 Web2.0 is a blog covering Frontend, Backend and other IT related topics and news
 
+Check it out: https://web20.tk
+
 ## Setup
 
 - Copy `etc/config.example.json` to `config.json`
