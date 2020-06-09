@@ -26,6 +26,7 @@ type ErrResp struct {
 	Error string `json:"error"`
 }
 
+// Yes, only one streame, no mutexes and other things yet. Just as simple ad posible..
 type RouteHandler func(http.ResponseWriter, *http.Request, map[string]interface{}) (string, error)
 type RouteApiHandler func(http.ResponseWriter, *http.Request) (interface{}, error)
 type HandlerType string
