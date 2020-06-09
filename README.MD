@@ -1,3 +1,8 @@
+![a11y-badge](https://img.shields.io/badge/accessibility-yes-green)
+![a11y-badge](https://img.shields.io/badge/https-yes-green)
+![a11y-badge](https://img.shields.io/badge/gzip-yes-green)
+![a11y-badge](https://img.shields.io/badge/lighthouse-~100-green)
+
 # Web20
 
 Web2.0 is a blog covering Frontend, Backend and other IT related topics and news
