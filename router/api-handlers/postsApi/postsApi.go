@@ -141,7 +141,7 @@ func downloadImg(src, name string) (string, error) {
 
 func optimizeImg(path string) error {
 	sysPath := "frontend/dist" + path
-	cmd := exec.Command("convert", sysPath, "-quality", "79", sysPath)
+	cmd := exec.Command("convert", sysPath, "-quality", "75", sysPath)
 	err := cmd.Run()
 	if err != nil {
 		return err

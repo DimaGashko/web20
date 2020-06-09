@@ -1,0 +1,30 @@
+{
+   "port": 9191,
+   "app-url": "http://localhost:9999",
+
+   "db": {
+      "port": 5432,
+      "host": "localhost",
+      "user": "postgres",
+      "pass": "14159265",
+      "name": "web20"
+   },
+
+   "post-about": "17042-diveloper",
+
+   "popular-posts": [
+      "9673-why-is-the-css-scale-inaccurate-in-latest-android-chrome-browser",
+      "17042-diveloper",
+      "15423-best-guid",
+      "13578-why-is-the-css-scale-inaccurate-in-latest-android-chrome-browser"
+   ],
+   "top-posts":[
+      "13121-diveloperfgsdfg",
+      "17042-diveloper",
+      "15423-best-guid",
+      "18143-why-is-the-css-scale-inaccurate-in-latest-android-chrome-browser",
+      "9673-why-is-the-css-scale-inaccurate-in-latest-android-chrome-browser",
+      "13578-why-is-the-css-scale-inaccurate-in-latest-android-chrome-browser"
+   ]  
+
+}
