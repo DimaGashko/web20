@@ -14,7 +14,7 @@ import (
 
 func List(w http.ResponseWriter, r *http.Request, context map[string]interface{}) (string, error) {
 	conn := db.Get()
-	posts := conn.Where("listed = true").Order("created_at").Find(&[]entries.Post{})
+	posts := conn.Where("listed = true").Order("created_at desc").Find(&[]entries.Post{})
 
 	context["posts"] = posts.Value
 	return templates.PATH + "posts-list.tmpl", nil
